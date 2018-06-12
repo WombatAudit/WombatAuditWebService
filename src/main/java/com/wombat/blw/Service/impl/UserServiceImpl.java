@@ -38,11 +38,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getOne(UserSignInForm userSignInForm) {
         //TODO
-        return null;
+        User user=userMapper.getUserByUserId(userSignInForm.getUsername());
+        if(user.getPassword()==userSignInForm.getPassword()) {
+            return user;
+        }else{
+            return null;
+        }
     }
 
     @Override
     public void create(UserSignUpForm userSignUpForm) {
         //TODO
+        userMapper.createUser(userSignUpForm.getUsername(),
+                userSignUpForm.getPassword(),
+                userSignUpForm.getRealName(),
+                userSignUpForm.getRole(),
+                userSignUpForm.getGender(),
+                userSignUpForm.getTel(),
+                userSignUpForm.getEmail(),
+                userSignUpForm.getCompanyId());
     }
 }

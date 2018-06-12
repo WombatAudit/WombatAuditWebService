@@ -11,6 +11,6 @@ public class Organization {
     private Integer companyId;
     private String name;
     private String description;
-    private BigDecimal budget;
+    private double budget;
 
 }

@@ -10,16 +10,16 @@ import java.util.List;
 @Component
 public interface CompanyMapper {
 
-//    @Select("SELECT * FROM company")
-//    @Results({
-//            @Result(property = "companyId", column = "co_id", javaType = Integer.class),
-//            @Result(property = "name", column = "name", javaType = String.class),
-//            @Result(property = "description", column = "description", javaType = String.class),
-//            @Result(property = "taxId", column = "tax_id", javaType = String.class),
-//            @Result(property = "accountBank", column = "account_bank", javaType = String.class),
-//            @Result(property = "account", column = "account", javaType = BigDecimal.class)
-//    })
-//    List<Company> getAll();
+    @Select("SELECT * FROM company")
+    @Results({
+            @Result(property = "companyId", column = "co_id", javaType = Integer.class),
+            @Result(property = "name", column = "name", javaType = String.class),
+            @Result(property = "description", column = "description", javaType = String.class),
+            @Result(property = "taxId", column = "tax_id", javaType = String.class),
+            @Result(property = "accountBank", column = "account_bank", javaType = String.class),
+            @Result(property = "account", column = "account", javaType = BigDecimal.class)
+    })
+    List<Company> getAll();
 //
 //    @Select("SELECT * FROM company WHERE co_id = #{companyId}")
 //    @Results({

@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class SimpleAssignmentDTO {
 
-    private String itemId;
+    private int itemId;
     private String itemName;
     private String userName;
-    private String status;
+    private int status;
 }
