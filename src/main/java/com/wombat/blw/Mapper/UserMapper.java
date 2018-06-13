@@ -38,6 +38,17 @@ public interface UserMapper {
 //    })
 //    List<User> getAll();
 //
+    @Select("SELECT * FROM user WHERE user_id = #{userId}")
+    @Results({
+            @Result(property = "userId", column = "user_id", javaType = Integer.class),
+            @Result(property = "role", column = "role", javaType = String.class),
+            @Result(property = "name", column = "name", javaType = String.class),
+            @Result(property = "gender", column = "gender", javaType = String.class),
+            @Result(property = "tel", column = "tel", javaType = BigDecimal.class),
+            @Result(property = "email", column = "email", javaType = String.class),
+            @Result(property = "companyId", column = "co_id", javaType = Integer.class)
+    })
+    User selectByUserId(Integer userId);
 
 //    @Insert("INSERT INTO user(user_id,role,name,gender,tel,email,co_id) VALUES(#{userId},#{role},#{name},#{gender},#{tel}," +
 //            "#{email},#{companyId})")

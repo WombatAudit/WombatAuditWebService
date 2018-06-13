@@ -58,18 +58,40 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public DetailedCompanyDTO getDetail(Integer companyId) {
+        DetailedCompanyDTO detailedCompanyDTO = new DetailedCompanyDTO();
+        Company company = companyMapper.selectByCompanyId(companyId);
+        detailedCompanyDTO.setAccount(company.getAccount());
+        detailedCompanyDTO.setAccountBank(company.getAccountBank());
+        detailedCompanyDTO.setCompanyId(company.getCompanyId());
+        detailedCompanyDTO.setName(company.getName());
+        detailedCompanyDTO.setDescription(company.getDescription());
+        detailedCompanyDTO.setTaxId(company.getTaxId());
+        return detailedCompanyDTO;
     }
 
     @Override
     public void create(CompanyForm companyForm) {
+        Company company = new Company();
+        company.setAccount(companyForm.getAccount());
+        company.setAccountBank(companyForm.getAccountBank());
+        company.setDescription(companyForm.getDescription());
+        company.setTaxId(companyForm.getTaxId());
+        company.setName(companyForm.getName());
+        companyMapper.insert(company);
     }
 
     @Override
     public void delete(Integer companyId) {
+        companyMapper.delete(companyId);
     }
 
     @Override
     public Integer getCoId(Integer userId) {
+        User user = new User();
+        user=userMapper.selectByUserId(userId);
+        int CoId;
+        CoId = user.getCompanyId();
+        return CoId;
     }
 
     private static final String DEST = "target/HelloWorld.pdf";
