@@ -1,7 +1,7 @@
 package com.wombat.blw.Controller;
 
+import com.wombat.blw.DO.Company;
 import com.wombat.blw.DTO.DetailedCompanyDTO;
-import com.wombat.blw.DTO.SimpleCompanyDTO;
 import com.wombat.blw.Enum.ErrorCode;
 import com.wombat.blw.Form.CompanyForm;
 import com.wombat.blw.Service.CompanyService;
@@ -25,7 +25,7 @@ public class CompanyController {
 
     @GetMapping("/companies")
     public ModelAndView getList(Map<String, Object> map) {
-        List<SimpleCompanyDTO> simpleCompanyDTOList = companyService.getList();
+        List<Company> simpleCompanyDTOList = companyService.getList();
         map.put("companyList", simpleCompanyDTOList);
         return new ModelAndView("company/list", map);
     }
