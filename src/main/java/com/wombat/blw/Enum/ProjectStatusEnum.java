@@ -3,7 +3,7 @@ package com.wombat.blw.Enum;
 import lombok.Getter;
 
 @Getter
-public enum ProjectStatusEnum {
+public enum ProjectStatusEnum implements CodeEnum {
 
     NOT_STARTED(0, "未开始"),
     REQUEST_CREATION(1, "请求创建"),

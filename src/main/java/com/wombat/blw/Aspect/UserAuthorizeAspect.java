@@ -27,7 +27,8 @@ public class UserAuthorizeAspect {
     private StringRedisTemplate redisTemplate;
 
     @Pointcut("execution(public * com.wombat.blw.Controller.*.*(..))" +
-            "&& !execution(public * com.wombat.blw.Controller.OrganizationController.*(..))")
+            "&& !execution(public * com.wombat.blw.Controller.UserController.*(..))" +
+            "&& !execution(public * com.wombat.blw.Controller.PageController.*(..))")
     public void verify() {
     }
 

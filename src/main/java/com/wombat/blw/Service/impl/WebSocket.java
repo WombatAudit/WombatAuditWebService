@@ -1,17 +1,15 @@
 package com.wombat.blw.Service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-@Component
-@ServerEndpoint("/websocket")
+//@Component
+//@ServerEndpoint("/websocket")
 @Slf4j
 public class WebSocket {
 

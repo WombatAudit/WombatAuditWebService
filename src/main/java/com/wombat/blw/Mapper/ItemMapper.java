@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ItemMapper {
 
-    //TODO
     @Select("select name from item where item_id=#{id}")
     String getItemNameByItemId(int id);
 

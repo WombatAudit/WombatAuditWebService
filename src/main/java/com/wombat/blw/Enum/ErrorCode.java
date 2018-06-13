@@ -3,7 +3,7 @@ package com.wombat.blw.Enum;
 import lombok.Getter;
 
 @Getter
-public enum ErrorCode {
+public enum ErrorCode implements CodeEnum {
 
     LOGOUT_SUCCESS(0, "注销成功"),
     USERNAME_NOT_EXIST(1, "用户名不存在"),
@@ -11,7 +11,8 @@ public enum ErrorCode {
     CREATE_SUCCESS(3, "创建成功"),
     DELETE_SUCCESS(4, "删除成功"),
     SUBMIT_SUCCESS(5, "提交成功"),
-    REVIEW_SUCCESS(6, "审核成功"),;
+    REVIEW_SUCCESS(6, "审核成功"),
+    USERNAME_EXIST(7, "用户名已存在"),;
 
     private Integer code;
     private String message;

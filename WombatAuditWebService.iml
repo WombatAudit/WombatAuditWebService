@@ -120,5 +120,8 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-messaging:5.0.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-websocket:5.0.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.11" level="project" />
+    <orderEntry type="library" name="jquery.slim" level="application" />
+    <orderEntry type="library" name="popper" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>

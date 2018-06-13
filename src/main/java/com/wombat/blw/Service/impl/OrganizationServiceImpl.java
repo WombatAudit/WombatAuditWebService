@@ -23,8 +23,13 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private OrganizationMapper organizationMapper;
+
+    @Autowired
     private ParticipateMapper participateMapper;
+
+    @Autowired
     private UserMapper userMapper;
+
     @Override
     public Page<OrganizationDTO> getOrgPage(Integer userId, Pageable pageable) {
 
@@ -59,10 +64,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     public List<MemberDTO> getMemberList(Integer orgId) {
         List<Participate> list = participateMapper.getSome(orgId);
         List<MemberDTO> list1 = new ArrayList<>();
-        for (Participate c:list){
+        for (Participate c : list) {
             User user = new User();
             MemberDTO memberDTO = new MemberDTO();
-            user = userMapper.selectByUserId(c.getUserId());
+            user = userMapper.findUserByUserId(c.getUserId());
             memberDTO.setRealName(user.getRealName());
             memberDTO.setUserId(user.getUserId());
             list1.add(memberDTO);
@@ -82,10 +87,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     public List<MemberDTO> getMemberListNotIn(Integer orgId) {
         List<Participate> list = participateMapper.getSomeReverse(orgId);
         List<MemberDTO> list1 = new ArrayList<>();
-        for (Participate d:list){
+        for (Participate d : list) {
             User user = new User();
             MemberDTO memberDTO = new MemberDTO();
-            user = userMapper.selectByUserId(d.getUserId());
+            user = userMapper.findUserByUserId(d.getUserId());
             memberDTO.setRealName(user.getRealName());
             memberDTO.setUserId(user.getUserId());
             list1.add(memberDTO);
@@ -95,6 +100,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public void remove(Integer orgId, Integer userId) {
-        participateMapper.delete(orgId,userId);
+        participateMapper.delete(orgId, userId);
     }
 }

@@ -3,6 +3,7 @@ package com.wombat.blw.DO;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class Project {
     private int prjId;

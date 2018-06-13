@@ -39,7 +39,10 @@ public class UserController {
     @PostMapping("/actions/signUp")
     public ModelAndView signUp(Map<String, Object> map, HttpServletResponse response,
                                @Validated UserSignUpForm userSignUpForm, BindingResult bindingResult) {
-
+        if (bindingResult.hasErrors()) {
+            //TODO
+        }
+        userService.create(userSignUpForm);
         return new ModelAndView();
     }
 

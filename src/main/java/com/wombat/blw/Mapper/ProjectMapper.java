@@ -10,6 +10,7 @@ import java.util.List;
 
 @Component
 public interface ProjectMapper {
+
     @Insert("insert into project " +
             "values (null,#{orgId},#{name},#{description},null,0,null)")
     void createProject(ProjectForm projectForm);
@@ -70,10 +71,13 @@ public interface ProjectMapper {
 
     @Update("update project set status=2 where prj_id=#{prjId}")
     void passCreation(Integer prjId);
+
     @Update("update project set status=4 where prj_id=#{prjId}")
     void passReimbursement(Integer prjId);
+
     @Update("update project set status=0 where prj_id=#{prjId}")
     void rejectCreation(Integer prjId);
+
     @Update("update project set status=2 where prj_id=#{prjId}")
     void rejectReimbursement(Integer prjId);
 }

@@ -5,6 +5,7 @@ import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
 import com.wombat.blw.Mapper.UserMapper;
 import com.wombat.blw.Service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,25 +38,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getOne(UserSignInForm userSignInForm) {
-        //TODO
-        User user=userMapper.getUserByUserId(userSignInForm.getUsername());
-        if(user.getPassword()==userSignInForm.getPassword()) {
-            return user;
-        }else{
+        User user = userMapper.findUserByUsername(userSignInForm.getUsername());
+        if (user == null) {
+            //TODO Username does not exist
             return null;
+        }
+        if (!user.getPassword().equals(userSignInForm.getPassword())) {
+            //TODO Incorrect password
+            return null;
+        } else {
+            return user;
         }
     }
 
     @Override
     public void create(UserSignUpForm userSignUpForm) {
-        //TODO
-        userMapper.createUser(userSignUpForm.getUsername(),
-                userSignUpForm.getPassword(),
-                userSignUpForm.getRealName(),
-                userSignUpForm.getRole(),
-                userSignUpForm.getGender(),
-                userSignUpForm.getTel(),
-                userSignUpForm.getEmail(),
-                userSignUpForm.getCompanyId());
+        if (userMapper.findUserByUsername(userSignUpForm.getUsername()) != null) {
+            //TODO Username already exists
+        }
+        User user = new User();
+        BeanUtils.copyProperties(userSignUpForm, user);
+        userMapper.create(user);
     }
 }

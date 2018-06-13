@@ -23,7 +23,7 @@ public interface ParticipateMapper {
             @Result(property = "userId", column = "user_id", javaType = Integer.class),
             @Result(property = "role", column = "role", javaType = Integer.class)
     })
-    Participate selectByOrganizationIdAndUserId(Integer organizationId,Integer userId);
+    Participate selectByOrganizationIdAndUserId(Integer organizationId, Integer userId);
 
     @Select("SELECT * FROM participate WHERE org_id = #{organization}")
     @Results({
@@ -39,7 +39,7 @@ public interface ParticipateMapper {
 
 
     @Delete("DELETE FROM part WHERE org_id = #{organizationId} and user_id = #{userId}")
-    void delete(Integer organizationId,Integer userId);
+    void delete(Integer organizationId, Integer userId);
 
     @Select("SELECT * FROM participate WHERE user_id not in  (SELECT * FROM participate WHERE org_id = " +
             "#{organization})")
