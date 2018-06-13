@@ -1,11 +1,12 @@
 package com.wombat.blw.Mapper;
 
 import com.wombat.blw.DO.User;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Component
 public interface UserMapper {
@@ -23,5 +24,31 @@ public interface UserMapper {
     void createUser(String username, String password, String realName,
                     Integer role, Integer gender, BigDecimal tel, String email, Integer companyId);
 
+<<<<<<< HEAD
+=======
+//    @Select("SELECT * FROM user")
+//    @Results({
+//            @Result(property = "userId", column = "user_id", javaType = Integer.class),
+//            @Result(property = "role", column = "role", javaType = String.class),
+//            @Result(property = "name", column = "name", javaType = String.class),
+//            @Result(property = "gender", column = "gender", javaType = String.class),
+//            @Result(property = "tel", column = "tel", javaType = BigDecimal.class),
+//            @Result(property = "email", column = "email", javaType = String.class),
+//            @Result(property = "companyId", column = "co_id", javaType = Integer.class)
+//    })
+//    List<User> getAll();
+//
+
+//    @Insert("INSERT INTO user(user_id,role,name,gender,tel,email,co_id) VALUES(#{userId},#{role},#{name},#{gender},#{tel}," +
+//            "#{email},#{companyId})")
+//    void insert(User user);
+//
+//    @Update("UPDATE user SET role=#{role},name=#{name},gender=#{gender},tel=#{tel},email=#{email}," +
+//            "co_id=#{companyId} WHERE user_id=#{userId}")
+//    void update(User user);
+//
+//    @Delete("DELETE FROM user WHERE user_id=#{userId}")
+//    void delete(Integer userId);
+>>>>>>> df37c87ba64d7a4a4d212c0e07bef85d08f62a5d
 
 }

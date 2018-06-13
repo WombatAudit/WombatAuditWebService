@@ -20,6 +20,7 @@ public interface CompanyMapper {
             @Result(property = "account", column = "account", javaType = BigDecimal.class)
     })
     List<Company> getAll();
+<<<<<<< HEAD
 //
 //    @Select("SELECT * FROM company WHERE co_id = #{companyId}")
 //    @Results({
@@ -44,4 +45,9 @@ public interface CompanyMapper {
 //    void delete(Integer companyId);
 
     //TODO
+=======
+
+
+
+>>>>>>> df37c87ba64d7a4a4d212c0e07bef85d08f62a5d
 }

@@ -1,10 +1,14 @@
 package com.wombat.blw.Mapper;
 
 import com.wombat.blw.DO.Organization;
+<<<<<<< HEAD
 import org.apache.ibatis.annotations.Select;
+=======
+>>>>>>> df37c87ba64d7a4a4d212c0e07bef85d08f62a5d
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+<<<<<<< HEAD
 @Component
 public interface OrganizationMapper {
 
@@ -24,4 +28,7 @@ public interface OrganizationMapper {
 @Select("select org_id,co_id,name,description,budget,create_time from organization " +
         "where org_id=#{orgId}")
     Organization selectOrgByOrgId(int orgId);
+=======
+
+>>>>>>> df37c87ba64d7a4a4d212c0e07bef85d08f62a5d
 }
