@@ -52,12 +52,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void create(UserSignUpForm userSignUpForm) {
+    public User create(UserSignUpForm userSignUpForm) {
         if (userMapper.findUserByUsername(userSignUpForm.getUsername()) != null) {
             //TODO Username already exists
+
         }
         User user = new User();
         BeanUtils.copyProperties(userSignUpForm, user);
         userMapper.create(user);
+        return userMapper.findUserByUserId(user.getUserId());
     }
 }

@@ -15,9 +15,10 @@ public interface UserService {
     User getOne(UserSignInForm userSignInForm);
 
     /**
-     * 根据用户注册提交的表单信息创建新用户
+     * 根据注册表单创建用户
      *
      * @param userSignUpForm
+     * @return 返回创建的用户对象
      */
-    void create(UserSignUpForm userSignUpForm);
+    User create(UserSignUpForm userSignUpForm);
 }

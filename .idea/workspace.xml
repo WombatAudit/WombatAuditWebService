@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c949b814-670f-49a6-83f1-348dd55ae6a7" name="Default" comment="">
+    <list default="true" id="c949b814-670f-49a6-83f1-348dd55ae6a7" name="Default" comment="Now we have three new pages">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/jquery-3.2.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/bootstrap-datepicker.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/bootstrap-notify.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/chart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/dataTables.bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/fullcalendar.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/jquery-ui.custom.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/jquery.dataTables.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/jquery.vmap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/jquery.vmap.sampledata.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/jquery.vmap.world.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/moment.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/pace.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/select2.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/plugins/sweetalert.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/popper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/companyRegister.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WombatAuditWebService.iml" beforeDir="false" afterPath="$PROJECT_DIR$/WombatAuditWebService.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Aspect/UserAuthorizeAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Aspect/UserAuthorizeAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Config/WebSocketConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/CompanyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/PageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Constant/RedisConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Constant/RedisConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/PageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Organization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Organization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Participate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Participate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Receipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Receipt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Version.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DTO/ReceiptDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DTO/ReceiptDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/GenderEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/GenderEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/ProjectStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/ProjectStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/RoleEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/RoleEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/UserSignUpForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/UserSignUpForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/AssignmentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/AssignmentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/CompanyMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/CompanyMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/DetailMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/DetailMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/OrganizationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/OrganizationMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ParticipateMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ParticipateMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ProjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ProjectMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ReceiptMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ReceiptMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/AssignmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/AssignmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/CompanyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/CompanyServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/OrganizationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/OrganizationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/ProjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/ProjectServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/WebSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/WebSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties.template" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties.template" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/assignment/detail.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/assignment/list.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/error.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/error.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/success.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/success.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/company/detail.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/company/list.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/organization/detail.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/organization/list.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/project/admin/detail.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/project/admin/overview-completed.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/project/admin/overview-request-creation.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/project/admin/overview-request-reimbursement.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/project/detail.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/project/list.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/signIn.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/signIn.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/signUp.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/signUp.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/test.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/test.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/wombat/blw/BlwApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/wombat/blw/LoggerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/wombat/blw/PdfTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/wombat/blw/PdfTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user.html" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,67 +60,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/UserController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="45" column="34" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PageController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/PageController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserAuthorizeAspect.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Aspect/UserAuthorizeAspect.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signIn.ftl" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/signIn.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" column="38" lean-forward="true" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="109" selection-start-column="109" selection-end-column="109" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PdfTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/wombat/blw/PdfTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/test.ftl">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -157,13 +106,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/templates/assignment/detail.ftl" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/ReceiptForm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/DTO/ProjectOverviewDTO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Util/UserUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/project/overview.ftl" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/StatusEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/ProjectController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ParticipateMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/AssignmentController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Participate.java" />
@@ -181,7 +123,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/CompanyService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/OrganizationService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/ProjectService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ItemMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/DetailMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/AssignmentMapper.java" />
@@ -192,22 +133,30 @@
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Config/WebSocketConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ReceiptMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Receipt.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/UserSignUpForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/DTO/ReceiptDTO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/CodeEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/ErrorCode.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/ProjectStatusEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Util/EnumUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/RoleEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/GenderEnum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Aspect/UserAuthorizeAspect.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/test.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Constant/RedisConstant.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/UserSignUpForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/PageController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wombat/blw/Aspect/UserAuthorizeAspect.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/test.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/signUp.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/companyRegister.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/signIn.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/common/success.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/common/error.ftl" />
       </list>
     </option>
   </component>
@@ -254,9 +203,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="997" />
+    <option name="x" value="996" />
     <option name="width" value="930" />
-    <option name="height" value="1088" />
+    <option name="height" value="1089" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -266,7 +215,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -287,133 +237,13 @@
             </path>
             <path>
               <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-              <item name="Aspect" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-              <item name="DO" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-              <item name="Enum" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-              <item name="Handler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-              <item name="Mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-              <item name="Util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="blw" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WombatAuditWebService" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WombatAuditWebService" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -441,15 +271,17 @@
       <recent name="com.wombat.blw.Mapper" />
       <recent name="com.wombat.blw.Service.impl" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\IJWorkspace\WombatAuditWebService\src\main\resources\static\mp3" />
-      <recent name="D:\IJWorkspace\WombatAuditWebService\src\main\resources" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IJWorkspace\WombatAuditWebService\src\main\resources\templates\project\admin" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\IJWorkspace\WombatAuditWebService\src\main\resources\templates\project\admin" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IntelliJ IDEA Workspace\WombatAuditWebService\src\main\resources\static" />
+      <recent name="D:\IntelliJ IDEA Workspace\WombatAuditWebService\src\main\resources\templates" />
+      <recent name="D:\IJWorkspace\WombatAuditWebService\src\main\resources\static\mp3" />
+      <recent name="D:\IJWorkspace\WombatAuditWebService\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -683,7 +515,8 @@
       <workItem from="1528719942560" duration="12000" />
       <workItem from="1528855850342" duration="1902000" />
       <workItem from="1528873144630" duration="8403000" />
-      <workItem from="1528901932445" duration="810000" />
+      <workItem from="1528901932445" duration="11981000" />
+      <workItem from="1528950829332" duration="12287000" />
     </task>
     <task id="LOCAL-00001" summary="...">
       <created>1526877139391</created>
@@ -699,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528903979891</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="...">
+      <created>1528904236613</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1528904236613</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -735,7 +575,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154126000" />
+    <option name="totallyTimeSpent" value="177584000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -748,10 +588,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="-7" width="1476" height="878" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32734805" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32655826" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.3293371" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info id="Capture Tool" order="2" />
@@ -760,17 +599,18 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.13535912" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.15582655" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32791328" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49929377" weight="0.32791328" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32791328" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.7100271" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32791328" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26287264" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32918397" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32780084" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49930844" visible="true" weight="0.15889831" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49930844" visible="true" weight="0.20833333" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="2" sideWeight="0.5006916" side_tool="true" weight="0.23624824" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -778,7 +618,6 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49929377" weight="0.32791328" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32791328" />
@@ -786,10 +625,9 @@
     <layout-to-restore>
       <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5311653" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32918397" />
       <window_info id="Image Layers" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32791328" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.5311653" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -814,8 +652,9 @@
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.13535912" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32791328" />
       <window_info anchor="right" id="Bean Validation" order="9" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.13535912" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -855,163 +694,23 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="..." />
-    <option name="LAST_COMMIT_MESSAGE" value="..." />
+    <MESSAGE value="Now we have three new pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now we have three new pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/UserServiceImpl.java</url>
+          <line>61</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="12" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/AssignmentMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ProjectMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-700">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ParticipateMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-126">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/OrganizationMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-180">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/ItemMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/DetailMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/CompanyMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="21" column="14" lean-forward="true" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/CompanyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/CompanyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/CompanyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Config/WebSocketConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#375#376#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/WebSocket.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="17" column="42" lean-forward="true" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/OrganizationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Assignment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Company.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Organization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/Version.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/ProjectServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2340">
-          <caret line="153" column="26" selection-start-line="153" selection-start-column="26" selection-end-line="153" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/ProjectController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5">
@@ -1061,13 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/UserSignUpForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="20" column="24" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DTO/ReceiptDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1079,20 +771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1206">
           <caret line="80" column="52" lean-forward="true" selection-start-line="80" selection-start-column="52" selection-end-line="80" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="13" lean-forward="true" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1114,10 +792,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#329#330#0" expanded="true" />
-            <element signature="e#394#395#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1149,20 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Enum/GenderEnum.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1177,20 +837,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="45" column="34" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/PageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Aspect/UserAuthorizeAspect.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1201,16 +847,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/test.ftl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="109" selection-start-column="109" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/wombat/blw/PdfTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -1218,13 +854,190 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/.project">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/js/main.js" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/js/jquery-3.2.1.min.js" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="110" selection-start-column="110" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties.template">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Constant/RedisConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="41" lean-forward="true" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/UserSignInForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" lean-forward="true" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/company/detail.ftl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/company/list.ftl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project/list.ftl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DO/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="59" column="11" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/UserSignUpForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/DTO/SimpleCompanyDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/CompanyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="40" column="40" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/signIn.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="38" lean-forward="true" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+        <state relative-caret-position="348">
+          <caret line="26" column="18" lean-forward="true" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#div#3;n#form#0;n#div#1;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#3;n#form#0;n#div#1;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/signUp.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="95" column="125" selection-start-line="95" selection-start-column="125" selection-end-line="95" selection-end-column="125" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#1;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common/success.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Controller/PageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="23" column="36" lean-forward="true" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="e#1104#1105#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/companyRegister.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="67" column="133" selection-start-line="67" selection-start-column="133" selection-end-line="67" selection-end-column="133" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#1;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common/error.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/test.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="8" selection-start-column="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wombat/blw/Form/CompanyForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="6770" column="3" lean-forward="true" selection-start-line="6770" selection-start-column="3" selection-end-line="6770" selection-end-column="3" />
         </state>
       </provider>
     </entry>

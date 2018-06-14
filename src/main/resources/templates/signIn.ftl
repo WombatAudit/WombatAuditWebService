@@ -1,29 +1,57 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="/wombataudit/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Sign In - Wombat Audit</title>
 </head>
 <body>
-<h1>Hello, world!</h1>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+<section class="material-half-bg">
+    <div class="cover"></div>
+</section>
+<section class="login-content">
+    <div class="logo">
+        <h1>Wombat Audit</h1>
+    </div>
+    <div class="login-box" style="min-height: 470px">
+        <form class="login-form" action="/wombataudit/users/actions/signIn" method="post" enctype="application/x-www-form-urlencoded">
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Sign In</h3>
+            <div class="form-group">
+                <label class="control-label">Username</label>
+                <input class="form-control" type="text" placeholder="Username" autofocus name="username">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password</label>
+                <input class="form-control" type="password" placeholder="Password" name="password">
+            </div>
+            <div class="form-group">
+                <div class="utility">
+                    <div class="animated-checkbox">
+                        <label>
+                            <input type="checkbox"><span class="label-text">Stay Signed in</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group btn-container">
+                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</button>
+                <a class="btn btn-primary btn-block" href="/wombataudit/pages/signUp" style="background-color: #f4c20d; border-color: #f4c20d;">Go to Sign Up</a>
+                <a class="btn btn-primary btn-block" href="/wombataudit/pages/companyRegister" style="background-color: #db3236; border-color: #db3236;">Go to Register company</a>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Essential javascripts for application to work-->
+<script src="/wombataudit/js/jquery-3.2.1.min.js"></script>
+<script src="/wombataudit/js/popper.min.js"></script>
+<script src="/wombataudit/js/bootstrap.min.js"></script>
+<script src="/wombataudit/js/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/wombataudit/js/plugins/pace.min.js"></script>
 </body>
 </html>

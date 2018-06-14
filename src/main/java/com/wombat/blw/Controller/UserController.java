@@ -4,10 +4,12 @@ import com.wombat.blw.Constant.CookieConstant;
 import com.wombat.blw.Constant.RedisConstant;
 import com.wombat.blw.DO.User;
 import com.wombat.blw.Enum.ErrorCode;
+import com.wombat.blw.Enum.RoleEnum;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
 import com.wombat.blw.Service.UserService;
 import com.wombat.blw.Util.CookieUtil;
+import com.wombat.blw.Util.EnumUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -42,8 +44,19 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             //TODO
         }
-        userService.create(userSignUpForm);
-        return new ModelAndView();
+        User user = userService.create(userSignUpForm);
+        String token = UUID.randomUUID().toString();
+        redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_FORMAT, token),
+                user.getUserId().toString(), RedisConstant.EXPIRE_TIME, TimeUnit.SECONDS);
+        CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE_TIME);
+        if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.GENERAL) {
+            //TODO Go to General user page
+
+        } else if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.ADMIN) {
+            //TODO Go to Admin user page
+
+        }
+        return new ModelAndView("test");
     }
 
     @PostMapping("/actions/signIn")
@@ -51,14 +64,22 @@ public class UserController {
                                @Validated UserSignInForm userSignInForm) {
         User user = userService.getOne(userSignInForm);
         if (user == null) {
-            map.put("msg", ErrorCode.USERNAME_NOT_EXIST + " 或 " + ErrorCode.INCORRECT_PASSWORD);
-            return new ModelAndView();
+            map.put("msg", ErrorCode.USERNAME_NOT_EXIST.getMessage() + " 或 " + ErrorCode.INCORRECT_PASSWORD.getMessage());
+            return new ModelAndView("common/error");
         }
         String token = UUID.randomUUID().toString();
         redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_FORMAT, token),
                 user.getUserId().toString(), RedisConstant.EXPIRE_TIME, TimeUnit.SECONDS);
         CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE_TIME);
-        return new ModelAndView();
+        if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.GENERAL) {
+            //TODO Go to General user page
+
+
+        } else if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.ADMIN) {
+            //TODO Go to Admin user page
+
+        }
+        return new ModelAndView("test");
     }
 
     @RequestMapping("/actions/logout")

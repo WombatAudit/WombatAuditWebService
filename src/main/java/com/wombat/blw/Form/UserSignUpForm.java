@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
@@ -18,18 +19,18 @@ public class UserSignUpForm {
     @NotBlank(message = "真实姓名不能为空")
     private String realName;
 
-    @NotBlank(message = "角色不能为空")
+    @NotNull(message = "角色不能为空")
     private Integer role;
 
-    @NotBlank(message = "性别不能为空")
+    @NotNull(message = "性别不能为空")
     private Integer gender;
 
-    @NotBlank(message = "手机号码不能为空")
+    @NotNull(message = "手机号码不能为空")
     private BigDecimal tel;
 
     @Email(message = "电子邮箱不合法")
     private String email;
 
-    @NotBlank(message = "公司不能为空")
+    @NotNull(message = "公司不能为空")
     private Integer companyId;
 }

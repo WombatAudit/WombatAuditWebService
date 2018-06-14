@@ -3,6 +3,7 @@ package com.wombat.blw.DO;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 public class User {
@@ -16,4 +17,5 @@ public class User {
     private BigDecimal tel;
     private String email;
     private Integer companyId;
+    private Date createTime;
 }

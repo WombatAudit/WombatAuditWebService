@@ -1,1 +1,0 @@
-<h1>Company Detail</h1>
