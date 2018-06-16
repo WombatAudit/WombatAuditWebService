@@ -77,7 +77,7 @@ public class UserController {
 
         } else if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.ADMIN) {
             //TODO Go to Admin user page
-
+            return new ModelAndView("redirect:/admin/organizations");
         }
         return new ModelAndView("test");
     }

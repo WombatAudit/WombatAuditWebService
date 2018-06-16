@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 
 @Component
@@ -25,7 +25,7 @@ public interface OrganizationMapper {
             @Result(property = "name", column = "name", javaType = String.class),
             @Result(property = "description", column = "description", javaType = String.class),
             @Result(property = "budget", column = "budget", javaType = BigDecimal.class),
-            @Result(property = "createTime", column = "create_time", javaType = Timestamp.class)
+            @Result(property = "createTime", column = "create_time", javaType = Date.class)
     })
     List<Organization> getAll();
 
@@ -36,7 +36,7 @@ public interface OrganizationMapper {
             @Result(property = "name", column = "name", javaType = String.class),
             @Result(property = "description", column = "description", javaType = String.class),
             @Result(property = "budget", column = "budget", javaType = BigDecimal.class),
-            @Result(property = "createTime", column = "create_time", javaType = Timestamp.class)
+            @Result(property = "createTime", column = "create_time", javaType = Date.class)
     })
     Organization selectByOrganizationId(Integer organizationId);
 
@@ -50,4 +50,19 @@ public interface OrganizationMapper {
 
     @Delete("DELETE FROM organization WHERE org_id = #{organizationId}")
     void delete(Integer organizationId);
+
+    @Select("select * from organization where co_id = #{coId}")
+    @Results({
+            @Result(property = "organizationId", column = "org_id", javaType = Integer.class),
+            @Result(property = "companyId", column = "co_id", javaType = Integer.class),
+            @Result(property = "name", column = "name", javaType = String.class),
+            @Result(property = "description", column = "description", javaType = String.class),
+            @Result(property = "budget", column = "budget", javaType = BigDecimal.class),
+            @Result(property = "createTime", column = "create_time", javaType = Date.class)
+    })
+    List<Organization> findAllOrgsByCoId(Integer coId);
+
+    @Select("select name from organization where org_id = #{orgId}")
+    @ResultType(String.class)
+    String findOrgNameById(Integer orgId);
 }

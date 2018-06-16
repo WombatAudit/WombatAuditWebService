@@ -41,13 +41,6 @@ public class ProjectController {
         return new ModelAndView("project/list", map);
     }
 
-    @GetMapping("/projects/{id}")
-    public ModelAndView getDetail(Map<String, Object> map, @PathVariable("id") Integer prjId) {
-        DetailedProjectDTO detailedProjectDTO = projectService.getDetail(prjId);
-        map.put("prj", detailedProjectDTO);
-        return new ModelAndView("project/detail", map);
-    }
-
     @PostMapping("/projects")
     public ModelAndView create(Map<String, Object> map, @Validated ProjectForm projectForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -101,33 +94,5 @@ public class ProjectController {
         List<ProjectOverviewDTO> projectOverviewDTOList = projectService.getInProgressList(coId);
         map.put("prjList", projectOverviewDTOList);
         return new ModelAndView("project/overview-in-progress", map);
-    }
-
-    @PostMapping("/projects/actions/pass-creation")
-    public ModelAndView passCreation(Map<String, Object> map, Integer prjId, String feedback) {
-        projectService.passCreation(prjId);
-        map.put("msg", ErrorCode.REVIEW_SUCCESS);
-        map.put("url", "");
-        return new ModelAndView("common/success", map);
-    }
-
-    @PostMapping("/projects/actions/pass-reimbursement")
-    public ModelAndView passReimbursement(Map<String, Object> map, Integer prjId, String feedback) {
-        projectService.passReimbursement(prjId);
-        map.put("msg", ErrorCode.REVIEW_SUCCESS);
-        map.put("url", "");
-        return new ModelAndView("common/success", map);
-    }
-
-    @PostMapping("/projects/actions/reject-creation")
-    public ModelAndView rejectCreation(Map<String, Object> map, Integer prjId, String feedback) {
-        projectService.rejectCreation(prjId);
-        return new ModelAndView("common/success", map);
-    }
-
-    @PostMapping("/projects/actions/reject-reimbursement")
-    public ModelAndView rejectReimbursement(Map<String, Object> map, Integer prjId, String feedback) {
-        projectService.passReimbursement(prjId);
-        return new ModelAndView("common/success", map);
     }
 }

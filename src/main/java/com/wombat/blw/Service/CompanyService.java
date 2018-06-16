@@ -17,4 +17,6 @@ public interface CompanyService {
     void delete(Integer companyId);
 
     Integer getCoId(Integer userId);
+
+    SimpleCompanyDTO findSimpleOne(Integer userId);
 }

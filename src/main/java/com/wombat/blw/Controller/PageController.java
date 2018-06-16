@@ -37,4 +37,5 @@ public class PageController {
     public ModelAndView registerCompany() {
         return new ModelAndView("companyRegister");
     }
+
 }

@@ -13,4 +13,5 @@ public class Project {
     private Date startTime;
     private int status;
     private Date endTime;
+    private Integer version;
 }

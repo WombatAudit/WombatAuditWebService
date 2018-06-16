@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface OrganizationService {
 
-    Page<OrganizationDTO> getOrgPage(Integer userId, Pageable pageable);
+    List<OrganizationDTO> findOrgsByCoId(Integer coId);
 
     void create(OrganizationForm organizationForm);
 

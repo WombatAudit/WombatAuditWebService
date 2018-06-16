@@ -35,20 +35,6 @@ public class OrganizationController {
     @Autowired
     private ProjectService projectService;
 
-    @GetMapping("/organizations")
-    public ModelAndView getList(Map<String, Object> map, HttpServletRequest request,
-                                @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        Integer userId = UserUtil.getUserId(request, redisTemplate);
-        if (userId == null) {
-            throw new UserAuthorizeException();
-        }
-        PageRequest pageRequest = PageRequest.of(page, size);
-        Page<OrganizationDTO> organizationDTOPage = organizationService.getOrgPage(userId, pageRequest);
-        map.put("orgList", organizationDTOPage.getContent());
-        return new ModelAndView("organization/list", map);
-    }
-
     @GetMapping("/organizations/{orgId}")
     public ModelAndView getOrgDetail(Map<String, Object> map, @PathVariable("orgId") Integer orgId) {
         OrganizationDTO organizationDTO = organizationService.getOne(orgId);

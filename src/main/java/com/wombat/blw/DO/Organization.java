@@ -2,6 +2,9 @@ package com.wombat.blw.DO;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 @Data
 public class Organization {
 
@@ -9,6 +12,6 @@ public class Organization {
     private Integer companyId;
     private String name;
     private String description;
-    private double budget;
-
+    private BigDecimal budget;
+    private Date createTime;
 }

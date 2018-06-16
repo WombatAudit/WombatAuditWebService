@@ -76,4 +76,11 @@ public class CompanyServiceImpl implements CompanyService {
         CoId = user.getCompanyId();
         return CoId;
     }
+
+    @Override
+    public SimpleCompanyDTO findSimpleOne(Integer userId) {
+        User user = userMapper.findUserByUserId(userId);
+        Company company = companyMapper.selectByCompanyId(user.getCompanyId());
+        return new SimpleCompanyDTO(company.getCompanyId(), company.getName());
+    }
 }

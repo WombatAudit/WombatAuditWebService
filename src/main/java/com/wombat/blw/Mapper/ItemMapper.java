@@ -19,4 +19,5 @@ public interface ItemMapper {
             @Result(property = "rcptId", column = "rcpt_id", javaType = Integer.class),
     })
     Item getItemByItemId(int id);
+
 }

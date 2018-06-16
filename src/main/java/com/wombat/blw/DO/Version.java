@@ -8,5 +8,5 @@ import java.util.Date;
 public class Version {
     private int prjId;
     private int version;
-    private Date createDate;
+    private Date createTime;
 }

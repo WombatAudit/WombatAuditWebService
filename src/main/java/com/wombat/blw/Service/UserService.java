@@ -1,6 +1,7 @@
 package com.wombat.blw.Service;
 
 import com.wombat.blw.DO.User;
+import com.wombat.blw.DTO.SimpleUserDTO;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
 
@@ -21,4 +22,6 @@ public interface UserService {
      * @return 返回创建的用户对象
      */
     User create(UserSignUpForm userSignUpForm);
+
+    SimpleUserDTO findSimpleOne(Integer userId);
 }

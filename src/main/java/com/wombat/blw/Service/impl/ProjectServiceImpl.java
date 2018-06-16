@@ -1,19 +1,23 @@
 package com.wombat.blw.Service.impl;
 
+import com.wombat.blw.DO.Item;
 import com.wombat.blw.DO.Organization;
 import com.wombat.blw.DO.Project;
-import com.wombat.blw.DTO.DetailedProjectDTO;
-import com.wombat.blw.DTO.ProjectOverviewDTO;
-import com.wombat.blw.DTO.SimpleProjectDTO;
+import com.wombat.blw.DO.Version;
+import com.wombat.blw.DTO.*;
 import com.wombat.blw.Form.ProjectForm;
 import com.wombat.blw.Mapper.OrganizationMapper;
 import com.wombat.blw.Mapper.ProjectMapper;
 import com.wombat.blw.Service.ProjectService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -36,27 +40,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<SimpleProjectDTO> getList(Integer orgId) {
-        List<Project> list = projectMapper.getProjectsByOrg(orgId);
-        List<SimpleProjectDTO> res = new ArrayList<>();
-        for (Project project : list) {
-            SimpleProjectDTO simpleProjectDTO = new SimpleProjectDTO();
-            simpleProjectDTO.setName(project.getName());
-            simpleProjectDTO.setProjectId(project.getPrjId());
-            res.add(simpleProjectDTO);
-        }
-        return res;
+        List<Project> projectList = projectMapper.getProjectsByOrg(orgId);
+        return projectList.stream().map(e -> new SimpleProjectDTO(e.getPrjId(), e.getName(), e.getStatus(),
+                e.getStartTime(), e.getEndTime())).collect(Collectors.toList());
     }
 
     @Override
-    public DetailedProjectDTO getDetail(Integer prjId) {
-        Project project = projectMapper.getProjectByPrjId(prjId);
-        DetailedProjectDTO detailedProjectDTO = new DetailedProjectDTO();
-        detailedProjectDTO.setName(project.getName());
-        detailedProjectDTO.setProjectId(project.getPrjId());
-        detailedProjectDTO.setDescription(project.getDescription());
-        detailedProjectDTO.setStartTime(project.getStartTime());
-        detailedProjectDTO.setStatues(project.getStatus());
-        return detailedProjectDTO;
+    public List<SimpleProjectDTO> findActiveList(Integer orgId) {
+        List<Project> projectList = projectMapper.getActiveProjectsByOrg(orgId);
+        return projectList.stream().map(e -> new SimpleProjectDTO(e.getPrjId(), e.getName(), e.getStatus(),
+                e.getStartTime(), e.getEndTime())).collect(Collectors.toList());
     }
 
     @Override
@@ -136,23 +129,47 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void passCreation(Integer prjId) {
-        projectMapper.passCreation(prjId);
+    public List<ProjectOverviewDTO> findOverViewByCompanyIdAndType(Integer coId, Integer type) {
+        List<Project> projectList = projectMapper.findByCoIdAndType(coId, type);
+        return projectList.stream().map(e -> new ProjectOverviewDTO(e.getPrjId(), e.getName(),
+                organizationMapper.findOrgNameById(e.getOrgId()), e.getStartTime(), e.getEndTime()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void passReimbursement(Integer prjId) {
-        projectMapper.passReimbursement(prjId);
+    public Version findLatestDetailVersion(Integer prjId) {
+        return projectMapper.findMaxDetailVersion(prjId);
     }
 
     @Override
-    public void rejectCreation(Integer prjId) {
-        projectMapper.rejectCreation(prjId);
+    public DetailedProjectDTO findDetailedProject(Integer prjId) {
+        Project project = projectMapper.findById(prjId);
+        DetailedProjectDTO detailedProjectDTO = new DetailedProjectDTO();
+        BeanUtils.copyProperties(project, detailedProjectDTO);
+        detailedProjectDTO.setOrgName(organizationMapper.findOrgNameById(project.getOrgId()));
+        Version version = projectMapper.findVersion(prjId, project.getVersion());
+        detailedProjectDTO.setVersionTime(version.getCreateTime());
+        List<Item> itemList = projectMapper.findItems(prjId, version.getVersion());
+        List<SimpleItemDTO> simpleItemDTOList = itemList.stream().map(e -> new SimpleItemDTO(e.getItemId(), e.getType(),
+                e.getName(), e.getQuantity(), e.getAmount())).collect(Collectors.toList());
+        detailedProjectDTO.setSimpleItemDTOList(simpleItemDTOList);
+        Function<SimpleItemDTO, BigDecimal> subTotal = simpleItemDTO -> simpleItemDTO.getAmount().multiply(new BigDecimal(simpleItemDTO.getQuantity()));
+        BigDecimal totalCost = simpleItemDTOList.stream().map(subTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+        detailedProjectDTO.setTotalCost(totalCost);
+        return detailedProjectDTO;
     }
 
     @Override
-    public void rejectReimbursement(Integer prjId) {
-        projectMapper.rejectReimbursement(prjId);
+    public SimpleProjectDTO findSimpleOne(Integer prjId) {
+        Project project = projectMapper.findById(prjId);
+        SimpleProjectDTO simpleProjectDTO = new SimpleProjectDTO();
+        BeanUtils.copyProperties(project, simpleProjectDTO);
+        return simpleProjectDTO;
+    }
+
+    @Override
+    public void updateStatus(Integer prjId, Integer status) {
+        projectMapper.updateStatus(prjId, status);
     }
 }
 

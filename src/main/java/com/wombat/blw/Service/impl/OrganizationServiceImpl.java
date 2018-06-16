@@ -10,6 +10,7 @@ import com.wombat.blw.Mapper.OrganizationMapper;
 import com.wombat.blw.Mapper.ParticipateMapper;
 import com.wombat.blw.Mapper.UserMapper;
 import com.wombat.blw.Service.OrganizationService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -29,12 +31,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private UserMapper userMapper;
-
-    @Override
-    public Page<OrganizationDTO> getOrgPage(Integer userId, Pageable pageable) {
-
-        return null;
-    }
 
     @Override
     public void create(OrganizationForm organizationForm) {
@@ -51,12 +47,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public OrganizationDTO getOne(Integer orgId) {
-        Organization organization = new Organization();
+        Organization organization;
         organization = organizationMapper.selectByOrganizationId(orgId);
         OrganizationDTO organizationDTO = new OrganizationDTO();
-        organizationDTO.setOrganizationId(organization.getOrganizationId());
-        organizationDTO.setName(organization.getName());
-        organizationDTO.setDescription(organization.getDescription());
+        BeanUtils.copyProperties(organization, organizationDTO);
         return organizationDTO;
     }
 
@@ -101,5 +95,12 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public void remove(Integer orgId, Integer userId) {
         participateMapper.delete(orgId, userId);
+    }
+
+    @Override
+    public List<OrganizationDTO> findOrgsByCoId(Integer coId) {
+        List<Organization> organizationList = organizationMapper.findAllOrgsByCoId(coId);
+        return organizationList.stream().map(e -> new OrganizationDTO(e.getOrganizationId(), e.getName(), e.getDescription(),
+                e.getBudget(), e.getCreateTime())).collect(Collectors.toList());
     }
 }
