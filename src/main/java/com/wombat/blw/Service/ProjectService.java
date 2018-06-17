@@ -1,7 +1,6 @@
 package com.wombat.blw.Service;
 
 import com.wombat.blw.DO.Version;
-import com.wombat.blw.DTO.DetailedItemDTO;
 import com.wombat.blw.DTO.DetailedProjectDTO;
 import com.wombat.blw.DTO.ProjectOverviewDTO;
 import com.wombat.blw.DTO.SimpleProjectDTO;
@@ -15,7 +14,7 @@ public interface ProjectService {
 
     List<SimpleProjectDTO> findActiveList(Integer orgId);
 
-    void create(ProjectForm projectForm);
+    SimpleProjectDTO create(ProjectForm projectForm);
 
     void delete(Integer projectId);
 

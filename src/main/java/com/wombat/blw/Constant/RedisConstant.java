@@ -4,5 +4,5 @@ public interface RedisConstant {
 
     String TOKEN_FORMAT = "wa_token_%s";
 
-    Integer EXPIRE_TIME = 7200; //2 hours
+    Integer EXPIRE_TIME = 72000; //20 hours
 }

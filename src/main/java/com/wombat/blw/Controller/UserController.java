@@ -3,8 +3,8 @@ package com.wombat.blw.Controller;
 import com.wombat.blw.Constant.CookieConstant;
 import com.wombat.blw.Constant.RedisConstant;
 import com.wombat.blw.DO.User;
+import com.wombat.blw.Enum.CompanyRoleEnum;
 import com.wombat.blw.Enum.ErrorCode;
-import com.wombat.blw.Enum.RoleEnum;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
 import com.wombat.blw.Service.UserService;
@@ -49,12 +49,12 @@ public class UserController {
         redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_FORMAT, token),
                 user.getUserId().toString(), RedisConstant.EXPIRE_TIME, TimeUnit.SECONDS);
         CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE_TIME);
-        if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.GENERAL) {
+        if (EnumUtil.getByCode(user.getRole(), CompanyRoleEnum.class) == CompanyRoleEnum.GENERAL) {
             //TODO Go to General user page
 
-        } else if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.ADMIN) {
+        } else if (EnumUtil.getByCode(user.getRole(), CompanyRoleEnum.class) == CompanyRoleEnum.ADMIN) {
             //TODO Go to Admin user page
-
+            return new ModelAndView("redirect:/admin/organizations");
         }
         return new ModelAndView("test");
     }
@@ -71,11 +71,10 @@ public class UserController {
         redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_FORMAT, token),
                 user.getUserId().toString(), RedisConstant.EXPIRE_TIME, TimeUnit.SECONDS);
         CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE_TIME);
-        if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.GENERAL) {
+        if (EnumUtil.getByCode(user.getRole(), CompanyRoleEnum.class) == CompanyRoleEnum.GENERAL) {
             //TODO Go to General user page
-
-
-        } else if (EnumUtil.getByCode(user.getRole(), RoleEnum.class) == RoleEnum.ADMIN) {
+            return new ModelAndView("redirect:/general/organizations");
+        } else if (EnumUtil.getByCode(user.getRole(), CompanyRoleEnum.class) == CompanyRoleEnum.ADMIN) {
             //TODO Go to Admin user page
             return new ModelAndView("redirect:/admin/organizations");
         }

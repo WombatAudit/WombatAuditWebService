@@ -16,4 +16,10 @@ public class ProjectForm {
 
     @NotBlank
     private String description;
+
+    @NotBlank
+    private String startTime;
+
+    @NotBlank
+    private String endTime;
 }

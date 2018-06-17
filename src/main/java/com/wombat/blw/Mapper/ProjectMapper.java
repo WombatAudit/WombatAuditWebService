@@ -4,7 +4,6 @@ import com.wombat.blw.DO.Item;
 import com.wombat.blw.DO.Project;
 import com.wombat.blw.DO.Receipt;
 import com.wombat.blw.DO.Version;
-import com.wombat.blw.Form.ProjectForm;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +14,12 @@ import java.util.List;
 @Component
 public interface ProjectMapper {
 
-    @Insert("insert into project " +
-            "values (null,#{orgId},#{name},#{description},null,0,null)")
-    void createProject(ProjectForm projectForm);
+    @Insert("insert into project(org_id, name, description, status, start_time, end_time) values (#{orgId}, #{name}, " +
+            "#{description}, #{status}, #{startTime}, #{endTime})")
+    @Options(useGeneratedKeys = true, keyProperty = "prjId", keyColumn = "prj_id")
+    void create(Project project);
 
-    @Update("update project set end_time=null and status=4 where prj_id=#{projectId}")
+    @Update("update project set end_time=null and status=4 where prj_id=#{prjId}")
     void deleteProject(Integer projectId);
 
     @Select("select name from project where prj_id = #{prjId}")

@@ -9,19 +9,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @Slf4j
-public class AdminPageController {
+public class AdminUserPageController {
 
     @Autowired
     private StringRedisTemplate redisTemplate;
@@ -47,7 +45,7 @@ public class AdminPageController {
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
         SimpleCompanyDTO simpleCompanyDTO = companyService.findSimpleOne(userId);
-        List<OrganizationDTO> organizationDTOList = organizationService.findOrgsByCoId(simpleCompanyDTO.getCompanyId());
+        List<OrganizationDTO> organizationDTOList = organizationService.findCompanyOrgs(simpleCompanyDTO.getCompanyId());
         map.put("orgList", organizationDTOList);
         return new ModelAndView("admin/organizations");
     }

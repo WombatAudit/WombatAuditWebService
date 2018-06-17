@@ -5,6 +5,8 @@ import com.wombat.blw.DO.Participate;
 import com.wombat.blw.DO.User;
 import com.wombat.blw.DTO.MemberDTO;
 import com.wombat.blw.DTO.OrganizationDTO;
+import com.wombat.blw.DTO.SimpleOrganizationDTO;
+import com.wombat.blw.Enum.OrgRoleEnum;
 import com.wombat.blw.Form.OrganizationForm;
 import com.wombat.blw.Mapper.OrganizationMapper;
 import com.wombat.blw.Mapper.ParticipateMapper;
@@ -12,10 +14,9 @@ import com.wombat.blw.Mapper.UserMapper;
 import com.wombat.blw.Service.OrganizationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,11 +34,20 @@ public class OrganizationServiceImpl implements OrganizationService {
     private UserMapper userMapper;
 
     @Override
-    public void create(OrganizationForm organizationForm) {
+    public OrganizationDTO create(Integer userId, OrganizationForm organizationForm) {
         Organization organization = new Organization();
-        organization.setName(organizationForm.getName());
-        organization.setDescription(organizationForm.getDescription());
-        organizationMapper.insert(organization);
+        BeanUtils.copyProperties(organizationForm, organization);
+        organization.setBudget(new BigDecimal(10000));
+        organizationMapper.create(organization);
+        Participate participate = new Participate();
+        participate.setOrganizationId(organization.getOrganizationId());
+        participate.setUserId(userId);
+        participate.setRole(OrgRoleEnum.MANAGER.getCode());
+        participateMapper.insert(participate);
+        Organization newOrganization = organizationMapper.selectOrgByOrgId(organization.getOrganizationId());
+        OrganizationDTO organizationDTO = new OrganizationDTO();
+        BeanUtils.copyProperties(newOrganization, organizationDTO);
+        return organizationDTO;
     }
 
     @Override
@@ -74,22 +84,14 @@ public class OrganizationServiceImpl implements OrganizationService {
         Participate participate = new Participate();
         participate.setOrganizationId(orgId);
         participate.setUserId(userId);
+        participate.setRole(OrgRoleEnum.MEMBER.getCode());
         participateMapper.insert(participate);
     }
 
     @Override
-    public List<MemberDTO> getMemberListNotIn(Integer orgId) {
-        List<Participate> list = participateMapper.getSomeReverse(orgId);
-        List<MemberDTO> list1 = new ArrayList<>();
-        for (Participate d : list) {
-            User user = new User();
-            MemberDTO memberDTO = new MemberDTO();
-            user = userMapper.findUserByUserId(d.getUserId());
-            memberDTO.setRealName(user.getRealName());
-            memberDTO.setUserId(user.getUserId());
-            list1.add(memberDTO);
-        }
-        return list1;
+    public List<MemberDTO> findMemberListNotIn(Integer coId, Integer orgId) {
+        List<User> userList = userMapper.findGeneralMembersOfCompanyNotIn(coId, orgId);
+        return userList.stream().map(e -> new MemberDTO(e.getUserId(), e.getRealName())).collect(Collectors.toList());
     }
 
     @Override
@@ -98,9 +100,23 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public List<OrganizationDTO> findOrgsByCoId(Integer coId) {
+    public List<OrganizationDTO> findCompanyOrgs(Integer coId) {
         List<Organization> organizationList = organizationMapper.findAllOrgsByCoId(coId);
         return organizationList.stream().map(e -> new OrganizationDTO(e.getOrganizationId(), e.getName(), e.getDescription(),
                 e.getBudget(), e.getCreateTime())).collect(Collectors.toList());
     }
+
+    @Override
+    public List<OrganizationDTO> findJoinedOrgs(Integer userId) {
+        List<Organization> organizationList = organizationMapper.findOrgsByUserId(userId);
+        return organizationList.stream().map(e -> new OrganizationDTO(e.getOrganizationId(), e.getName(), e.getDescription(),
+                e.getBudget(), e.getCreateTime())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SimpleOrganizationDTO> findSimpleManagedList(Integer userId) {
+        List<Organization> organizationList = organizationMapper.findJoinedOrgWithRole(userId, OrgRoleEnum.MANAGER.getCode());
+        return organizationList.stream().map(e -> new SimpleOrganizationDTO(e.getOrganizationId(), e.getName())).collect(Collectors.toList());
+    }
+
 }

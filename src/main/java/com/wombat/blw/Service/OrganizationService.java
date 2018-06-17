@@ -2,17 +2,18 @@ package com.wombat.blw.Service;
 
 import com.wombat.blw.DTO.MemberDTO;
 import com.wombat.blw.DTO.OrganizationDTO;
+import com.wombat.blw.DTO.SimpleOrganizationDTO;
 import com.wombat.blw.Form.OrganizationForm;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface OrganizationService {
 
-    List<OrganizationDTO> findOrgsByCoId(Integer coId);
+    List<OrganizationDTO> findCompanyOrgs(Integer coId);
 
-    void create(OrganizationForm organizationForm);
+    List<OrganizationDTO> findJoinedOrgs(Integer userId);
+
+    OrganizationDTO create(Integer userId, OrganizationForm organizationForm);
 
     void delete(Integer orgId);
 
@@ -22,7 +23,9 @@ public interface OrganizationService {
 
     void join(Integer orgId, Integer userId);
 
-    List<MemberDTO> getMemberListNotIn(Integer orgId);
+    List<MemberDTO> findMemberListNotIn(Integer coId, Integer orgId);
 
     void remove(Integer orgId, Integer userId);
+
+    List<SimpleOrganizationDTO> findSimpleManagedList(Integer userId);
 }

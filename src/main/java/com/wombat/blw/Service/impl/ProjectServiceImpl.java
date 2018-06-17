@@ -4,11 +4,16 @@ import com.wombat.blw.DO.Item;
 import com.wombat.blw.DO.Organization;
 import com.wombat.blw.DO.Project;
 import com.wombat.blw.DO.Version;
-import com.wombat.blw.DTO.*;
+import com.wombat.blw.DTO.DetailedProjectDTO;
+import com.wombat.blw.DTO.ProjectOverviewDTO;
+import com.wombat.blw.DTO.SimpleItemDTO;
+import com.wombat.blw.DTO.SimpleProjectDTO;
+import com.wombat.blw.Enum.ProjectStatusEnum;
 import com.wombat.blw.Form.ProjectForm;
 import com.wombat.blw.Mapper.OrganizationMapper;
 import com.wombat.blw.Mapper.ProjectMapper;
 import com.wombat.blw.Service.ProjectService;
+import com.wombat.blw.Util.DateUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +34,17 @@ public class ProjectServiceImpl implements ProjectService {
     private OrganizationMapper organizationMapper;
 
     @Override
-    public void create(ProjectForm projectForm) {
-        projectMapper.createProject(projectForm);
+    public SimpleProjectDTO create(ProjectForm projectForm) {
+        Project project = new Project();
+        BeanUtils.copyProperties(projectForm, project);
+        project.setStatus(ProjectStatusEnum.NOT_STARTED.getCode());
+        project.setStartTime(DateUtil.str2Date(projectForm.getStartTime(), DateUtil.FORMAT_YMDTHM));
+        project.setEndTime(DateUtil.str2Date(projectForm.getEndTime(), DateUtil.FORMAT_YMDTHM));
+        projectMapper.create(project);
+        Project newProject = projectMapper.findById(project.getPrjId());
+        SimpleProjectDTO simpleProjectDTO = new SimpleProjectDTO();
+        BeanUtils.copyProperties(newProject, simpleProjectDTO);
+        return simpleProjectDTO;
     }
 
     @Override

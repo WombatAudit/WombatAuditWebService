@@ -1,6 +1,5 @@
 package com.wombat.blw.Controller;
 
-import com.wombat.blw.DTO.DetailedProjectDTO;
 import com.wombat.blw.DTO.ProjectOverviewDTO;
 import com.wombat.blw.DTO.SimpleProjectDTO;
 import com.wombat.blw.Enum.ErrorCode;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 

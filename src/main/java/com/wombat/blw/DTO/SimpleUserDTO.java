@@ -7,10 +7,12 @@ public class SimpleUserDTO {
 
     private String username;
     private String companyName;
+    private Integer companyId;
 
-    public SimpleUserDTO(String username, String companyName) {
+    public SimpleUserDTO(String username, String companyName, Integer companyId) {
         this.username = username;
         this.companyName = companyName;
+        this.companyId = companyId;
     }
 
     public SimpleUserDTO() {

@@ -14,8 +14,15 @@ public interface OrganizationMapper {
     @Select("select org_id from organization where co_id=#{coId}")
     List<Integer> selectOrgIdByCoId(int coId);
 
-    @Select("select org_id,co_id,name,description,budget,create_time from organization " +
-            "where org_id=#{orgId}")
+    @Select("select org_id,co_id,name,description,budget,create_time from organization where org_id = #{orgId}")
+    @Results({
+            @Result(property = "organizationId", column = "org_id", javaType = Integer.class),
+            @Result(property = "companyId", column = "co_id", javaType = Integer.class),
+            @Result(property = "name", column = "name", javaType = String.class),
+            @Result(property = "description", column = "description", javaType = String.class),
+            @Result(property = "budget", column = "budget", javaType = BigDecimal.class),
+            @Result(property = "createTime", column = "create_time", javaType = Date.class)
+    })
     Organization selectOrgByOrgId(int orgId);
 
     @Select("SELECT * FROM organization")
@@ -40,9 +47,10 @@ public interface OrganizationMapper {
     })
     Organization selectByOrganizationId(Integer organizationId);
 
-    @Insert("INSERT INTO organization(org_id,co_id,name,description,budget,create_time) " +
-            "VALUES(#{organizationId},#{companyId},#{name},#{description},#{budget},#{createTime})")
-    void insert(Organization organization);
+    @Insert("insert into organization(co_id,name,description,budget) values (#{companyId}, #{name}, #{description}, " +
+            "#{budget})")
+    @Options(useGeneratedKeys = true, keyColumn = "org_id", keyProperty = "organizationId")
+    void create(Organization organization);
 
     @Update("UPDATE organization SET org_id=#{organizationId},name=#{name},description=#{description}," +
             "budget=#{budget},create_time=#{createTime} WHERE org_id=#{organizationId}")
@@ -65,4 +73,26 @@ public interface OrganizationMapper {
     @Select("select name from organization where org_id = #{orgId}")
     @ResultType(String.class)
     String findOrgNameById(Integer orgId);
+
+    @Select("select * from organization natural join participate where user_id = #{userId}")
+    @Results({
+            @Result(property = "organizationId", column = "org_id", javaType = Integer.class),
+            @Result(property = "companyId", column = "co_id", javaType = Integer.class),
+            @Result(property = "name", column = "name", javaType = String.class),
+            @Result(property = "description", column = "description", javaType = String.class),
+            @Result(property = "budget", column = "budget", javaType = BigDecimal.class),
+            @Result(property = "createTime", column = "create_time", javaType = Date.class)
+    })
+    List<Organization> findOrgsByUserId(Integer userId);
+
+    @Select("select * from organization natural join participate where user_id = #{userId} and role = #{role}")
+    @Results({
+            @Result(property = "organizationId", column = "org_id", javaType = Integer.class),
+            @Result(property = "companyId", column = "co_id", javaType = Integer.class),
+            @Result(property = "name", column = "name", javaType = String.class),
+            @Result(property = "description", column = "description", javaType = String.class),
+            @Result(property = "budget", column = "budget", javaType = BigDecimal.class),
+            @Result(property = "createTime", column = "create_time", javaType = Date.class)
+    })
+    List<Organization> findJoinedOrgWithRole(@Param("userId") Integer userId, @Param("role") Integer role);
 }

@@ -4,5 +4,5 @@ public interface CookieConstant {
 
     String TOKEN = "token";
 
-    Integer EXPIRE_TIME = 7200; //2 hours
+    Integer EXPIRE_TIME = 72000; //20 hours
 }

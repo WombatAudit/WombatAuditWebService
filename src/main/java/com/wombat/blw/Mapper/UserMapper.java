@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public interface UserMapper {
@@ -48,4 +49,12 @@ public interface UserMapper {
             @Result(property = "createTime", column = "create_time", javaType = Date.class)
     })
     User findUserByUsername(String username);
+
+    @Select("SELECT user_id, real_name FROM user WHERE co_id = #{coId} AND role = 1 AND user_id NOT IN " +
+            "( SELECT user_id FROM participate WHERE org_id = #{orgId} )")
+    @Results({
+            @Result(property = "userId", column = "user_id", javaType = Integer.class),
+            @Result(property = "realName", column = "real_name", javaType = String.class)
+    })
+    List<User> findGeneralMembersOfCompanyNotIn(@Param("coId") Integer coId, @Param("orgId") Integer orgId);
 }

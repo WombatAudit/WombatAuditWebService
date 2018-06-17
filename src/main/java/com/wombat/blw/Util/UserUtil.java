@@ -2,7 +2,6 @@ package com.wombat.blw.Util;
 
 import com.wombat.blw.Constant.CookieConstant;
 import com.wombat.blw.Constant.RedisConstant;
-import com.wombat.blw.DTO.SimpleUserDTO;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.servlet.http.Cookie;

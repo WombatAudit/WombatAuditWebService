@@ -2,13 +2,11 @@ package com.wombat.blw.Service.impl;
 
 import com.wombat.blw.DO.Company;
 import com.wombat.blw.DO.User;
-import com.wombat.blw.DTO.SimpleCompanyDTO;
 import com.wombat.blw.DTO.SimpleUserDTO;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
 import com.wombat.blw.Mapper.CompanyMapper;
 import com.wombat.blw.Mapper.UserMapper;
-import com.wombat.blw.Service.CompanyService;
 import com.wombat.blw.Service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +73,7 @@ public class UserServiceImpl implements UserService {
     public SimpleUserDTO findSimpleOne(Integer userId) {
         User user = userMapper.findUserByUserId(userId);
         Company company = companyMapper.selectByCompanyId(user.getCompanyId());
-        return new SimpleUserDTO(user.getUsername(), company.getName());
+        return new SimpleUserDTO(user.getUsername(), company.getName(), company.getCompanyId());
     }
 
 }
