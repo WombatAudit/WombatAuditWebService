@@ -4,10 +4,7 @@ import com.wombat.blw.DO.Item;
 import com.wombat.blw.DO.Organization;
 import com.wombat.blw.DO.Project;
 import com.wombat.blw.DO.Version;
-import com.wombat.blw.DTO.DetailedProjectDTO;
-import com.wombat.blw.DTO.ProjectOverviewDTO;
-import com.wombat.blw.DTO.SimpleItemDTO;
-import com.wombat.blw.DTO.SimpleProjectDTO;
+import com.wombat.blw.DTO.*;
 import com.wombat.blw.Enum.ProjectStatusEnum;
 import com.wombat.blw.Form.ProjectForm;
 import com.wombat.blw.Mapper.OrganizationMapper;
@@ -41,6 +38,11 @@ public class ProjectServiceImpl implements ProjectService {
         project.setStartTime(DateUtil.str2Date(projectForm.getStartTime(), DateUtil.FORMAT_YMDTHM));
         project.setEndTime(DateUtil.str2Date(projectForm.getEndTime(), DateUtil.FORMAT_YMDTHM));
         projectMapper.create(project);
+        Version version = new Version();
+        version.setTag("Initial");
+        projectMapper.createVersion(version);
+        projectMapper.addProjectVersion(project.getPrjId(), version.getVersionId());
+        projectMapper.updateProjectVersion(project.getPrjId(), 1);
         Project newProject = projectMapper.findById(project.getPrjId());
         SimpleProjectDTO simpleProjectDTO = new SimpleProjectDTO();
         BeanUtils.copyProperties(newProject, simpleProjectDTO);
@@ -49,101 +51,25 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void delete(Integer projectId) {
-        projectMapper.deleteProject(projectId);
+        //Todo
     }
 
     @Override
     public List<SimpleProjectDTO> getList(Integer orgId) {
-        List<Project> projectList = projectMapper.getProjectsByOrg(orgId);
-        return projectList.stream().map(e -> new SimpleProjectDTO(e.getPrjId(), e.getName(), e.getStatus(),
+        List<Project> projectList = projectMapper.findProjectsByOrg(orgId);
+        return projectList.stream().map(e -> new SimpleProjectDTO(e.getPrjId(), e.getOrgId(), e.getName(), e.getStatus(),
                 e.getStartTime(), e.getEndTime())).collect(Collectors.toList());
     }
 
     @Override
-    public List<SimpleProjectDTO> findActiveList(Integer orgId) {
-        List<Project> projectList = projectMapper.getActiveProjectsByOrg(orgId);
-        return projectList.stream().map(e -> new SimpleProjectDTO(e.getPrjId(), e.getName(), e.getStatus(),
+    public List<SimpleProjectDTO> findStartedSimpleList(Integer orgId) {
+        List<Project> projectList = projectMapper.findByOrgIdAndNotInStatus(orgId, ProjectStatusEnum.NOT_STARTED.getCode());
+        return projectList.stream().map(e -> new SimpleProjectDTO(e.getPrjId(), e.getOrgId(), e.getName(), e.getStatus(),
                 e.getStartTime(), e.getEndTime())).collect(Collectors.toList());
     }
 
     @Override
-    public List<ProjectOverviewDTO> getCompletedList(Integer coId) {
-        List<Integer> list = organizationMapper.selectOrgIdByCoId(coId);
-        List<ProjectOverviewDTO> res = new ArrayList<>();
-        for (Integer orgaId : list) {
-            List<Project> orgProject = projectMapper.getProjectsByOrg(orgaId);
-            for (Project project : orgProject) {
-                ProjectOverviewDTO projectOverviewDTO = new ProjectOverviewDTO();
-                projectOverviewDTO.setName(project.getName());
-                projectOverviewDTO.setOrgName(organizationMapper.selectOrgByOrgId(
-                        project.getOrgId()).getName());
-                projectOverviewDTO.setStartTime(project.getStartTime());
-                projectOverviewDTO.setEndTime(project.getEndTime());
-                res.add(projectOverviewDTO);
-            }
-        }
-        return res;
-    }
-
-    @Override
-    public List<ProjectOverviewDTO> getRequestCreationList(Integer coId) {
-        List<Integer> list = organizationMapper.selectOrgIdByCoId(coId);
-        List<ProjectOverviewDTO> res = new ArrayList<>();
-        for (Integer orgId : list) {
-            Organization organization = organizationMapper.selectOrgByOrgId(orgId);
-            List<Project> orgProject = projectMapper.getRequestCreationProjectsByOrg(orgId);
-            for (Project project : orgProject) {
-                ProjectOverviewDTO projectOverviewDTO = new ProjectOverviewDTO();
-                projectOverviewDTO.setName(project.getName());
-                projectOverviewDTO.setOrgName(organization.getName());
-                projectOverviewDTO.setStartTime(project.getStartTime());
-                projectOverviewDTO.setEndTime(project.getEndTime());
-                res.add(projectOverviewDTO);
-            }
-        }
-        return res;
-    }
-
-    @Override
-    public List<ProjectOverviewDTO> getRequestReimbursementList(Integer coId) {
-        List<Integer> list = organizationMapper.selectOrgIdByCoId(coId);
-        List<ProjectOverviewDTO> res = new ArrayList<>();
-        for (Integer orgId : list) {
-            Organization organization = organizationMapper.selectOrgByOrgId(orgId);
-            List<Project> orgProject = projectMapper.getRequestReimbursementProjectsByOrg(orgId);
-            for (Project project : orgProject) {
-                ProjectOverviewDTO projectOverviewDTO = new ProjectOverviewDTO();
-                projectOverviewDTO.setName(project.getName());
-                projectOverviewDTO.setOrgName(organization.getName());
-                projectOverviewDTO.setEndTime(project.getEndTime());
-                projectOverviewDTO.setStartTime(project.getStartTime());
-                res.add(projectOverviewDTO);
-            }
-        }
-        return res;
-    }
-
-    @Override
-    public List<ProjectOverviewDTO> getInProgressList(Integer coId) {
-        List<Integer> list = organizationMapper.selectOrgIdByCoId(coId);
-        List<ProjectOverviewDTO> res = new ArrayList<>();
-        for (Integer orgId : list) {
-            Organization organization = organizationMapper.selectOrgByOrgId(orgId);
-            List<Project> orgProject = projectMapper.getInProgressProjectsByOrg(orgId);
-            for (Project project : orgProject) {
-                ProjectOverviewDTO projectOverviewDTO = new ProjectOverviewDTO();
-                projectOverviewDTO.setName(project.getName());
-                projectOverviewDTO.setEndTime(project.getEndTime());
-                projectOverviewDTO.setOrgName(organization.getName());
-                projectOverviewDTO.setStartTime(project.getStartTime());
-                res.add(projectOverviewDTO);
-            }
-        }
-        return res;
-    }
-
-    @Override
-    public List<ProjectOverviewDTO> findOverViewByCompanyIdAndType(Integer coId, Integer type) {
+    public List<ProjectOverviewDTO> findOverviewByCompanyIdAndType(Integer coId, Integer type) {
         List<Project> projectList = projectMapper.findByCoIdAndType(coId, type);
         return projectList.stream().map(e -> new ProjectOverviewDTO(e.getPrjId(), e.getName(),
                 organizationMapper.findOrgNameById(e.getOrgId()), e.getStartTime(), e.getEndTime()))
@@ -151,26 +77,21 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Version findLatestDetailVersion(Integer prjId) {
-        return projectMapper.findMaxDetailVersion(prjId);
-    }
-
-    @Override
-    public DetailedProjectDTO findDetailedProject(Integer prjId) {
+    public AdminDetailedProjectDTO findAdminDetailedProject(Integer prjId) {
         Project project = projectMapper.findById(prjId);
-        DetailedProjectDTO detailedProjectDTO = new DetailedProjectDTO();
-        BeanUtils.copyProperties(project, detailedProjectDTO);
-        detailedProjectDTO.setOrgName(organizationMapper.findOrgNameById(project.getOrgId()));
-        Version version = projectMapper.findVersion(prjId, project.getVersion());
-        detailedProjectDTO.setVersionTime(version.getCreateTime());
-        List<Item> itemList = projectMapper.findItems(prjId, version.getVersion());
+        AdminDetailedProjectDTO adminDetailedProjectDTO = new AdminDetailedProjectDTO();
+        BeanUtils.copyProperties(project, adminDetailedProjectDTO);
+        adminDetailedProjectDTO.setOrgName(organizationMapper.findOrgNameById(project.getOrgId()));
+        Version version = projectMapper.findVersion(project.getVersionId());
+        adminDetailedProjectDTO.setVersionTime(version.getCreateTime());
+        List<Item> itemList = projectMapper.findItems(version.getVersionId());
         List<SimpleItemDTO> simpleItemDTOList = itemList.stream().map(e -> new SimpleItemDTO(e.getItemId(), e.getType(),
                 e.getName(), e.getQuantity(), e.getAmount())).collect(Collectors.toList());
-        detailedProjectDTO.setSimpleItemDTOList(simpleItemDTOList);
+        adminDetailedProjectDTO.setSimpleItemDTOList(simpleItemDTOList);
         Function<SimpleItemDTO, BigDecimal> subTotal = simpleItemDTO -> simpleItemDTO.getAmount().multiply(new BigDecimal(simpleItemDTO.getQuantity()));
         BigDecimal totalCost = simpleItemDTOList.stream().map(subTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
-        detailedProjectDTO.setTotalCost(totalCost);
-        return detailedProjectDTO;
+        adminDetailedProjectDTO.setTotalCost(totalCost);
+        return adminDetailedProjectDTO;
     }
 
     @Override
@@ -185,5 +106,42 @@ public class ProjectServiceImpl implements ProjectService {
     public void updateStatus(Integer prjId, Integer status) {
         projectMapper.updateStatus(prjId, status);
     }
-}
 
+    @Override
+    public List<ProjectOverviewDTO> findRelatedOverviewByType(Integer userId, Integer type) {
+        List<Organization> organizationList = organizationMapper.findOrgsByUserId(userId);
+        List<Project> projectList = new ArrayList<>();
+        for (Organization organization : organizationList) {
+            List<Project> subList = projectMapper.findByOrgIdAndStatus(organization.getOrganizationId(), type);
+            projectList.addAll(subList);
+        }
+        return projectList.stream().map(e -> new ProjectOverviewDTO(e.getPrjId(), e.getName(),
+                organizationMapper.findOrgNameById(e.getOrgId()), e.getStartTime(), e.getEndTime())).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProjectDTO findOne(Integer prjId) {
+        Project project = projectMapper.findById(prjId);
+        ProjectDTO projectDTO = new ProjectDTO();
+        BeanUtils.copyProperties(project, projectDTO);
+        return projectDTO;
+    }
+
+    @Override
+    public GeneralDetailedProjectDTO findGeneralDetailedProject(Integer prjId) {
+        Project project = projectMapper.findById(prjId);
+        GeneralDetailedProjectDTO generalDetailedProjectDTO = new GeneralDetailedProjectDTO();
+        BeanUtils.copyProperties(project, generalDetailedProjectDTO);
+        generalDetailedProjectDTO.setOrgName(organizationMapper.findOrgNameById(project.getOrgId()));
+        Version version = projectMapper.findVersion(project.getVersionId());
+        generalDetailedProjectDTO.setVersionId(version.getVersionId());
+        generalDetailedProjectDTO.setVersionTag(version.getTag());
+        generalDetailedProjectDTO.setVersionTime(version.getCreateTime());
+        List<Item> itemList = projectMapper.findItems(version.getVersionId());
+        List<ItemDTO> itemDTOList = itemList.stream().map(e -> new ItemDTO(e.getItemId(), e.getType(),
+                e.getName(), e.getDescription(), e.getQuantity(), e.getAmount(), projectMapper.findPrjName(prjId), prjId))
+                .collect(Collectors.toList());
+        generalDetailedProjectDTO.setItemDTOList(itemDTOList);
+        return generalDetailedProjectDTO;
+    }
+}

@@ -24,7 +24,7 @@
 </head>
 <body class="app sidebar-mini rtl">
 <!-- Navbar-->
-<#include "/admin/common/navbar.ftl">
+<#include "/general/common/navbar.ftl">
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
@@ -35,13 +35,26 @@
         </div>
     </div>
     <ul class="app-menu">
-        <li><a class="app-menu__item" href="/wombataudit/admin/organizations"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Organizations</span></a></li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Organizations</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="/wombataudit/general/organizations/pages/create"><i class="icon fa fa-circle-o"></i> Create a organization</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/organizations"><i class="icon fa fa-circle-o"></i> My organizations</a></li>
+            </ul>
+        </li>
         <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Projects</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="/wombataudit/admin/projects/toCreate"><i class="icon fa fa-circle-o"></i> Request to create</a></li>
-                <li><a class="treeview-item" href="/wombataudit/admin/projects/toReimburse" rel="noopener"><i class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
-                <li><a class="treeview-item active" href="/wombataudit/admin/projects/inProgress"><i class="icon fa fa-circle-o"></i> In progress</a></li>
-                <li><a class="treeview-item" href="/wombataudit/admin/projects/deferred"><i class="icon fa fa-circle-o"></i> Deferred</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/pages/create"><i class="icon fa fa-circle-o"></i> Create a project</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/notStarted"><i class="icon fa fa-circle-o"></i> Not started</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/toCreate"><i class="icon fa fa-circle-o"></i> Request to create</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
+                <li><a class="treeview-item active" href="/wombataudit/general/projects/inProgress"><i class="icon fa fa-circle-o"></i> In progress</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/deferred"><i class="icon fa fa-circle-o"></i> Deferred</a></li>
+            </ul>
+        </li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Assignments</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned"><i class="icon fa fa-circle-o"></i> Assigned</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received"><i class="icon fa fa-circle-o"></i> Received</a></li>
             </ul>
         </li>
     </ul>
@@ -74,14 +87,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <#list projectList as prj>
+                    <#list prjList as prj>
                     <tr>
                         <td>${prj?counter}</td>
                         <td>${prj.name}</td>
                         <td>${prj.orgName}</td>
                         <td>${prj.startTime?datetime}</td>
                         <td>${prj.endTime?datetime}</td>
-                        <td><button onclick="window.location.href='/wombataudit/admin/projects/${prj.prjId?c}'" class="btn btn-primary btn-sm" type="button">View</button></td>
+                        <td><button onclick="window.location.href='/wombataudit/general/projects/${prj.prjId?c}'" class="btn btn-primary btn-sm" type="button">View</button></td>
                     </tr>
                     </#list>
                     </tbody>

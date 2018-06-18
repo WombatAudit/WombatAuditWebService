@@ -19,15 +19,11 @@ public interface ProjectMapper {
     @Options(useGeneratedKeys = true, keyProperty = "prjId", keyColumn = "prj_id")
     void create(Project project);
 
-    @Update("update project set end_time=null and status=4 where prj_id=#{prjId}")
-    void deleteProject(Integer projectId);
-
     @Select("select name from project where prj_id = #{prjId}")
     @ResultType(String.class)
     String findPrjName(Integer prjId);
 
-    @Select("select prj_id,org_id,name,description,start_time,status,end_time " +
-            "from project where org_id=#{orgId}")
+    @Select("select * from project where org_id = #{orgId}")
     @Results({
             @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
             @Result(property = "orgId", column = "org_id", javaType = Integer.class),
@@ -36,12 +32,11 @@ public interface ProjectMapper {
             @Result(property = "name", column = "name", javaType = String.class),
             @Result(property = "description", column = "prj_id", javaType = String.class),
             @Result(property = "status", column = "status", javaType = Integer.class),
-            @Result(property = "version", column = "version", javaType = Integer.class)
+            @Result(property = "versionId", column = "version_id", javaType = Integer.class)
     })
-    List<Project> getProjectsByOrg(Integer orgId);
+    List<Project> findProjectsByOrg(Integer orgId);
 
-    @Select("select prj_id,org_id,name,description,start_time,status,end_time " +
-            "from project where org_id=#{orgId} and status != 0")
+    @Select("select * from project where org_id = #{orgId} and status != #{status}")
     @Results({
             @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
             @Result(property = "orgId", column = "org_id", javaType = Integer.class),
@@ -50,52 +45,12 @@ public interface ProjectMapper {
             @Result(property = "name", column = "name", javaType = String.class),
             @Result(property = "description", column = "prj_id", javaType = String.class),
             @Result(property = "status", column = "status", javaType = Integer.class),
-            @Result(property = "version", column = "version", javaType = Integer.class)
+            @Result(property = "versionId", column = "version_id", javaType = Integer.class)
     })
-    List<Project> getActiveProjectsByOrg(Integer orgId);
+    List<Project> findByOrgIdAndNotInStatus(@Param("orgId") Integer orgId, @Param("status") Integer status);
 
-    @Select("select prj_id,org_id,name,description,start_time,status,end_time " +
-            "from project where prj_id=#{prjId}")
-    @Results({
-            @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
-            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
-            @Result(property = "startTime", column = "start_time", javaType = Date.class),
-            @Result(property = "endTime", column = "end_time", javaType = Date.class)
-    })
-    Project getProjectByPrjId(Integer prjId);
-
-    @Select("select prj_id,org_id,name,description,start_time,status,end_time " +
-            "from project where org_id=#{orgId} and status=1")
-    @Results({
-            @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
-            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
-            @Result(property = "startTime", column = "start_time", javaType = Date.class),
-            @Result(property = "endTime", column = "end_time", javaType = Date.class)
-    })
-    List<Project> getRequestCreationProjectsByOrg(Integer orgId);
-
-    @Select("select prj_id,org_id,name,description,start_time,status,end_time " +
-            "from project where org_id=#{orgId} and status=3")
-    @Results({
-            @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
-            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
-            @Result(property = "startTime", column = "start_time", javaType = Date.class),
-            @Result(property = "endTime", column = "end_time", javaType = Date.class)
-    })
-    List<Project> getRequestReimbursementProjectsByOrg(Integer orgId);
-
-    @Select("select prj_id,org_id,name,description,start_time,status,end_time " +
-            "from project where org_id=#{orgId} and status=2")
-    @Results({
-            @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
-            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
-            @Result(property = "startTime", column = "start_time", javaType = Date.class),
-            @Result(property = "endTime", column = "end_time", javaType = Date.class)
-    })
-    List<Project> getInProgressProjectsByOrg(Integer orgId);
-
-    @Select("select prj_id, project.org_id, project.name, project.description, start_time, status, end_time from project join organization " +
-            "on project.org_id = organization.org_id where organization.co_id = #{coId} and project.status = #{type}")
+    @Select("select prj_id, project.org_id, project.name, project.description, start_time, status, end_time, version_id from project join organization " +
+            "on project.org_id = organization.org_id where organization.co_id = #{coId} and project.status = #{status}")
     @Results({
             @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
             @Result(property = "orgId", column = "org_id", javaType = Integer.class),
@@ -104,9 +59,22 @@ public interface ProjectMapper {
             @Result(property = "name", column = "name", javaType = String.class),
             @Result(property = "description", column = "prj_id", javaType = String.class),
             @Result(property = "status", column = "status", javaType = Integer.class),
-            @Result(property = "version", column = "version", javaType = Integer.class)
+            @Result(property = "versionId", column = "version_id", javaType = Integer.class)
     })
-    List<Project> findByCoIdAndType(@Param("coId") Integer coId, @Param("type") Integer type);
+    List<Project> findByCoIdAndType(@Param("coId") Integer coId, @Param("status") Integer status);
+
+    @Select("select * from project where org_id = #{orgId} and status = #{status}")
+    @Results({
+            @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
+            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
+            @Result(property = "startTime", column = "start_time", javaType = Date.class),
+            @Result(property = "endTime", column = "end_time", javaType = Date.class),
+            @Result(property = "name", column = "name", javaType = String.class),
+            @Result(property = "description", column = "description", javaType = String.class),
+            @Result(property = "status", column = "status", javaType = Integer.class),
+            @Result(property = "versionId", column = "version_id", javaType = Integer.class)
+    })
+    List<Project> findByOrgIdAndStatus(@Param("orgId") Integer orgId, @Param("status") Integer status);
 
     @Select("select * from project where prj_id = #{prjId}")
     @Results({
@@ -117,19 +85,11 @@ public interface ProjectMapper {
             @Result(property = "name", column = "name", javaType = String.class),
             @Result(property = "description", column = "description", javaType = String.class),
             @Result(property = "status", column = "status", javaType = Integer.class),
-            @Result(property = "version", column = "version", javaType = Integer.class)
+            @Result(property = "versionId", column = "version_id", javaType = Integer.class)
     })
     Project findById(Integer prjId);
 
-    @Select("select * from version where prj_id = #{prjId} and version = (select max(version) from version where prj_id = #{prjId})")
-    @Results({
-            @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
-            @Result(property = "version", column = "version", javaType = Integer.class),
-            @Result(property = "createTime", column = "create_time", javaType = Date.class)
-    })
-    Version findMaxDetailVersion(Integer prjId);
-
-    @Select("select * from item natural join detail where prj_id = #{prjId} and version = #{version}")
+    @Select("select * from item natural join detail where version_id = #{versionId}")
     @Results({
             @Result(property = "itemId", column = "item_id", javaType = Integer.class),
             @Result(property = "type", column = "type", javaType = String.class),
@@ -139,7 +99,7 @@ public interface ProjectMapper {
             @Result(property = "amount", column = "amount", javaType = BigDecimal.class),
             @Result(property = "rcptId", column = "rcpt_id", javaType = Integer.class)
     })
-    List<Item> findItems(@Param("prjId") Integer prjId, @Param("version") Integer version);
+    List<Item> findItems(Integer versionId);
 
     @Select("select * from item where item_id = #{itemId}")
     @Results({
@@ -166,11 +126,20 @@ public interface ProjectMapper {
     @Update("update project set status = #{status} where prj_id = #{prjId}")
     void updateStatus(@Param("prjId") Integer prjId, @Param("status") Integer status);
 
-    @Select("select * from version where prj_id = #{prjId} and version = #{version}")
+    @Select("select * from version where version_id = #{versionId}")
     @Results({
-            @Result(property = "prjId", column = "prj_id", javaType = Integer.class),
-            @Result(property = "version", column = "version", javaType = Integer.class),
-            @Result(property = "createTime", column = "create_time", javaType = Date.class)
+            @Result(property = "versionId", column = "version_id", javaType = Integer.class),
+            @Result(property = "createTime", column = "create_time", javaType = Date.class),
+            @Result(property = "tag", column = "tag", javaType = String.class)
     })
-    Version findVersion(@Param("prjId") Integer prjId, @Param("version") Integer version);
+    Version findVersion(Integer versionId);
+
+    @Insert("insert into versionId(versionId, tag) values (#{versionId}, #{tag})")
+    void createVersion(Version version);
+
+    @Update("update project set versionId = #{versionId} where prj_id = #{prjId}")
+    void updateProjectVersion(@Param("prjId") Integer prjId, @Param("versionId") Integer versionId);
+
+    @Insert("insert into project_version(version_id, prj_id) values (#{versionId}, #{prjId})")
+    void addProjectVersion(@Param("versionId") Integer versionId, @Param("prjId") Integer prjId);
 }

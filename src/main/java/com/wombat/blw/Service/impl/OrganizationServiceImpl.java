@@ -7,6 +7,7 @@ import com.wombat.blw.DTO.MemberDTO;
 import com.wombat.blw.DTO.OrganizationDTO;
 import com.wombat.blw.DTO.SimpleOrganizationDTO;
 import com.wombat.blw.Enum.OrgRoleEnum;
+import com.wombat.blw.Exception.BaseException;
 import com.wombat.blw.Form.OrganizationForm;
 import com.wombat.blw.Mapper.OrganizationMapper;
 import com.wombat.blw.Mapper.ParticipateMapper;
@@ -40,7 +41,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         organization.setBudget(new BigDecimal(10000));
         organizationMapper.create(organization);
         Participate participate = new Participate();
-        participate.setOrganizationId(organization.getOrganizationId());
+        participate.setOrgId(organization.getOrganizationId());
         participate.setUserId(userId);
         participate.setRole(OrgRoleEnum.MANAGER.getCode());
         participateMapper.insert(participate);
@@ -61,11 +62,13 @@ public class OrganizationServiceImpl implements OrganizationService {
         organization = organizationMapper.selectByOrganizationId(orgId);
         OrganizationDTO organizationDTO = new OrganizationDTO();
         BeanUtils.copyProperties(organization, organizationDTO);
+        User user = findManager(orgId);
+        organizationDTO.setManager(user.getRealName());
         return organizationDTO;
     }
 
     @Override
-    public List<MemberDTO> getMemberList(Integer orgId) {
+    public List<MemberDTO> findMembersInOrg(Integer orgId) {
         List<Participate> list = participateMapper.getSome(orgId);
         List<MemberDTO> list1 = new ArrayList<>();
         for (Participate c : list) {
@@ -82,7 +85,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public void join(Integer orgId, Integer userId) {
         Participate participate = new Participate();
-        participate.setOrganizationId(orgId);
+        participate.setOrgId(orgId);
         participate.setUserId(userId);
         participate.setRole(OrgRoleEnum.MEMBER.getCode());
         participateMapper.insert(participate);
@@ -119,4 +122,12 @@ public class OrganizationServiceImpl implements OrganizationService {
         return organizationList.stream().map(e -> new SimpleOrganizationDTO(e.getOrganizationId(), e.getName())).collect(Collectors.toList());
     }
 
+    @Override
+    public User findManager(Integer orgId) {
+        List<Participate> participateList = participateMapper.findRoleOfOrg(orgId, OrgRoleEnum.MANAGER.getCode());
+        if (participateList.size() != 1) {
+            throw new BaseException();
+        }
+        return userMapper.findUserByUserId(participateList.get(0).getUserId());
+    }
 }

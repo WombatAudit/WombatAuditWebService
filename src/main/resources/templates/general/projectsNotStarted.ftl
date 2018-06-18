@@ -13,7 +13,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Organizations - WombatAudit General</title>
+    <title>Organizations - WombatAudit Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,16 +35,16 @@
         </div>
     </div>
     <ul class="app-menu">
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Organizations</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Organizations</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="/wombataudit/general/organizations/pages/create"><i class="icon fa fa-circle-o"></i> Create a organization</a></li>
-                <li><a class="treeview-item active" href="/wombataudit/general/organizations"><i class="icon fa fa-circle-o"></i> My organizations</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/organizations"><i class="icon fa fa-circle-o"></i> My organizations</a></li>
             </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Projects</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Projects</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="/wombataudit/general/projects/pages/create"><i class="icon fa fa-circle-o"></i> Create a project</a></li>
-                <li><a class="treeview-item" href="/wombataudit/general/projects/notStarted"><i class="icon fa fa-circle-o"></i> Not started</a></li>
+                <li><a class="treeview-item active" href="/wombataudit/general/projects/notStarted"><i class="icon fa fa-circle-o"></i> Not started</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/toCreate"><i class="icon fa fa-circle-o"></i> Request to create</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/inProgress"><i class="icon fa fa-circle-o"></i> In progress</a></li>
@@ -63,38 +63,37 @@
 <main class="app-content">
     <div class="app-title">
         <div class="div">
-            <h1><i class="fa fa-laptop"></i> Organizations</h1>
-            <p>All joined organizations</p>
+            <h1><i class="fa fa-laptop"></i> Projects</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="#">Organizations</a></li>
+            <li class="breadcrumb-item"><a href="#">Projects</a></li>
         </ul>
     </div>
     <div class="col-md-12">
         <div class="tile">
-            <h3 class="tile-title">All joined organizations</h3>
+            <h3 class="tile-title">All projects not started</h3>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th width="40%">Description</th>
-                        <th>Budget</th>
-                        <th>Create Time</th>
+                        <th>Organization Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <#list orgList as org>
+                    <#list prjList as prj>
                     <tr>
-                        <td>${org?counter}</td>
-                        <td>${org.name}</td>
-                        <td>${org.description}</td>
-                        <td>${org.budget}</td>
-                        <td>${org.createTime}</td>
-                        <td><button onclick="window.location.href='/wombataudit/general/organizations/${org.organizationId?c}'" class="btn btn-primary btn-sm" type="button">View</button></td>
+                        <td>${prj?counter}</td>
+                        <td>${prj.name}</td>
+                        <td>${prj.orgName}</td>
+                        <td>${prj.startTime?datetime}</td>
+                        <td>${prj.endTime?datetime}</td>
+                        <td><button onclick="window.location.href='/wombataudit/general/projects/${prj.prjId?c}'" class="btn btn-primary btn-sm" type="button">View</button></td>
                     </tr>
                     </#list>
                     </tbody>

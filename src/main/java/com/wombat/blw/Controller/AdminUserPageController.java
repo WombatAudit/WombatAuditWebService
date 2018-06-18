@@ -56,8 +56,8 @@ public class AdminUserPageController {
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
         OrganizationDTO organizationDTO = organizationService.getOne(orgId);
-        List<MemberDTO> memberDTOList = organizationService.getMemberList(orgId);
-        List<SimpleProjectDTO> simpleProjectDTOList = projectService.findActiveList(orgId);
+        List<MemberDTO> memberDTOList = organizationService.findMembersInOrg(orgId);
+        List<SimpleProjectDTO> simpleProjectDTOList = projectService.findStartedSimpleList(orgId);
         map.put("org", organizationDTO);
         map.put("memberList", memberDTOList);
         map.put("projectList", simpleProjectDTOList);
@@ -70,7 +70,7 @@ public class AdminUserPageController {
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
         Integer coId = companyService.getCoId(userId);
-        List<ProjectOverviewDTO> projectOverviewDTOList = projectService.findOverViewByCompanyIdAndType(coId,
+        List<ProjectOverviewDTO> projectOverviewDTOList = projectService.findOverviewByCompanyIdAndType(coId,
                 ProjectStatusEnum.REQUEST_REIMBURSEMENT.getCode());
         map.put("projectList", projectOverviewDTOList);
         return new ModelAndView("admin/projectsToReimburse");
@@ -82,7 +82,7 @@ public class AdminUserPageController {
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
         Integer coId = companyService.getCoId(userId);
-        List<ProjectOverviewDTO> projectOverviewDTOList = projectService.findOverViewByCompanyIdAndType(coId,
+        List<ProjectOverviewDTO> projectOverviewDTOList = projectService.findOverviewByCompanyIdAndType(coId,
                 ProjectStatusEnum.IN_PROGRESS.getCode());
         map.put("projectList", projectOverviewDTOList);
         return new ModelAndView("admin/projectsInProgress");
@@ -94,7 +94,7 @@ public class AdminUserPageController {
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
         Integer coId = companyService.getCoId(userId);
-        List<ProjectOverviewDTO> projectOverviewDTOList = projectService.findOverViewByCompanyIdAndType(coId,
+        List<ProjectOverviewDTO> projectOverviewDTOList = projectService.findOverviewByCompanyIdAndType(coId,
                 ProjectStatusEnum.DEFERRED.getCode());
         map.put("projectList", projectOverviewDTOList);
         return new ModelAndView("admin/projectsDeferred");
@@ -106,7 +106,7 @@ public class AdminUserPageController {
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
         Integer coId = companyService.getCoId(userId);
-        List<ProjectOverviewDTO> projectOverviewDTOList = projectService.findOverViewByCompanyIdAndType(coId,
+        List<ProjectOverviewDTO> projectOverviewDTOList = projectService.findOverviewByCompanyIdAndType(coId,
                 ProjectStatusEnum.REQUEST_CREATION.getCode());
         map.put("projectList", projectOverviewDTOList);
         return new ModelAndView("admin/projectsToCreate");
@@ -117,8 +117,8 @@ public class AdminUserPageController {
         Integer userId = UserUtil.getUserId(request, redisTemplate);
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
-        DetailedProjectDTO detailedProjectDTO = projectService.findDetailedProject(prjId);
-        map.put("prj", detailedProjectDTO);
+        AdminDetailedProjectDTO adminDetailedProjectDTO = projectService.findAdminDetailedProject(prjId);
+        map.put("prj", adminDetailedProjectDTO);
         return new ModelAndView("admin/detailedProject");
     }
 

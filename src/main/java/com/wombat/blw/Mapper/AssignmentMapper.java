@@ -1,6 +1,7 @@
 package com.wombat.blw.Mapper;
 
 import com.wombat.blw.DO.Assignment;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -12,13 +13,12 @@ import java.util.List;
 @Component
 public interface AssignmentMapper {
 
-    @Select("select user_id,item_id,status,max(start_date) as max_date " +
-            "from assignment " +
-            "where item_id=#{itemId}")
+    @Select("select * from assignment where item_id = #{itemId}")
     @Results({
             @Result(property = "userId", column = "user_id", javaType = Integer.class),
             @Result(property = "itemId", column = "item_id", javaType = Integer.class),
-            @Result(property = "startDate", column = "max_date", javaType = Date.class),
+            @Result(property = "status", column = "status", javaType = Integer.class),
+            @Result(property = "startTime", column = "start_time", javaType = Date.class),
     })
     List<Assignment> getListByItemId(Integer itemId);
 
@@ -28,10 +28,10 @@ public interface AssignmentMapper {
     @Results({
             @Result(property = "userId", column = "user_id", javaType = Integer.class),
             @Result(property = "itemId", column = "item_id", javaType = Integer.class),
-            @Result(property = "startDate", column = "max_date", javaType = Date.class),
+            @Result(property = "startTime", column = "max_date", javaType = Date.class),
     })
     List<Assignment> getListByUserId(Integer userId);
 
-    @Select("select status from assignment where user_id=#{userId} and item_id=#{itemId}")
-    String getStatusByKey(Integer userId, Integer itemId);
+    @Insert("insert into assignment(user_id, item_id, status) values (#{userId}, #{itemId}, #{status})")
+    void create(Assignment assignment);
 }

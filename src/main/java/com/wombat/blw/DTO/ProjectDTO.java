@@ -5,24 +5,24 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class SimpleProjectDTO {
+public class ProjectDTO {
 
     private Integer prjId;
-    private Integer orgId;
     private String name;
     private Integer status;
     private Date createTime;
     private Date endTime;
+    private String description;
 
-    public SimpleProjectDTO(Integer prjId, Integer orgId, String name, Integer status, Date createTime, Date endTime) {
+    public ProjectDTO(Integer prjId, String name, Integer status, Date createTime, Date endTime, String description) {
         this.prjId = prjId;
-        this.orgId = orgId;
         this.name = name;
         this.status = status;
         this.createTime = createTime;
         this.endTime = endTime;
+        this.description = description;
     }
 
-    public SimpleProjectDTO() {
+    public ProjectDTO() {
     }
 }

@@ -6,8 +6,17 @@ import java.util.Date;
 
 @Data
 public class Assignment {
-    private int userId;
-    private int itemId;
-    private int status;
-    private Date startDate;
+
+    private Integer userId;
+    private Integer itemId;
+    private Integer status;
+    private Date startTime;
+
+    public Assignment(Integer userId, Integer itemId) {
+        this.userId = userId;
+        this.itemId = itemId;
+    }
+
+    public Assignment() {
+    }
 }

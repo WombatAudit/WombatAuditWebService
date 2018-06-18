@@ -53,8 +53,8 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Assignments</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="/wombataudit/general/assignments/assigned"><i class="icon fa fa-circle-o"></i> Assigned</a></li>
-                <li><a class="treeview-item" href="/wombataudit/general/assignments/received"><i class="icon fa fa-circle-o"></i> Received</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned"><i class="icon fa fa-circle-o"></i> Assigned</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received"><i class="icon fa fa-circle-o"></i> Received</a></li>
             </ul>
         </li>
     </ul>
@@ -67,6 +67,7 @@
             <p>${org.description}</p>
             <p><strong>Budget</strong>&nbsp;&nbsp;&nbsp;${org.budget}</p>
             <p><strong>Create Time</strong>&nbsp;&nbsp;&nbsp;${org.createTime}</p>
+            <p><strong>Manager</strong>&nbsp;&nbsp;&nbsp;${org.manager}</p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -81,7 +82,9 @@
             </div>
             <div class="tile-footer">
                 <h4 class="text-right">${memberList?size}&nbsp;&nbsp;in total</h4>
-                <button class="btn btn-primary" type="button" onclick="window.location.href='/wombataudit/general/organizations/${org.organizationId?c}/invite'">Invite new member</button>
+                <#if manage??>
+                    <button class="btn btn-primary" type="button" onclick="window.location.href='/wombataudit/general/organizations/${org.organizationId?c}/invite'">Invite new member</button>
+                </#if>
             </div>
         </div>
     </div>
@@ -134,29 +137,6 @@
             </table>
         </div>
     </div>
-    <div class="row dialog" style="display: none;">
-        <div class="col-lg-6">
-            <div class="bs-component">
-                <div class="modal" style="position: relative; top: auto; right: auto; left: auto; bottom: auto; z-index: 1; display: block;">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Modal title</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Modal body text goes here.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="button">Save changes</button>
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </main>
 <!-- Essential javascripts for application to work-->
 <script src="/wombataudit/js/jquery-3.2.1.min.js"></script>
@@ -171,7 +151,6 @@
     $('.bs-component [data-toggle="popover"]').popover();
     $('.bs-component [data-toggle="tooltip"]').tooltip();
     $('#demoSelect').select2();
-
 </script>
 </body>
 </html>

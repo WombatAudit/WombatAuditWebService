@@ -7,7 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class DetailedProjectDTO {
+public class AdminDetailedProjectDTO {
+
     private Integer prjId;
     private String name;
     private String description;

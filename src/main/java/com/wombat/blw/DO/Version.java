@@ -6,7 +6,8 @@ import java.util.Date;
 
 @Data
 public class Version {
-    private int prjId;
-    private int version;
+
+    private int versionId;
+    private String tag;
     private Date createTime;
 }

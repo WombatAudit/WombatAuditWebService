@@ -13,7 +13,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Organizations - WombatAudit General</title>
+    <title>Project - WombatAudit General</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,13 +35,13 @@
         </div>
     </div>
     <ul class="app-menu">
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Organizations</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Organizations</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="/wombataudit/general/organizations/pages/create"><i class="icon fa fa-circle-o"></i> Create a organization</a></li>
-                <li><a class="treeview-item active" href="/wombataudit/general/organizations"><i class="icon fa fa-circle-o"></i> My organizations</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/organizations"><i class="icon fa fa-circle-o"></i> My organizations</a></li>
             </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Projects</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Projects</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="/wombataudit/general/projects/pages/create"><i class="icon fa fa-circle-o"></i> Create a project</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/notStarted"><i class="icon fa fa-circle-o"></i> Not started</a></li>
@@ -63,45 +63,61 @@
 <main class="app-content">
     <div class="app-title">
         <div class="div">
-            <h1><i class="fa fa-laptop"></i> Organizations</h1>
-            <p>All joined organizations</p>
+            <h1><i class="fa fa-laptop"></i> Status&nbsp;&nbsp;&nbsp;
+            <#switch prj.status>
+                <#case 1>Request creation<#break>
+                <#case 2>In progress<#break>
+                <#case 3>Request reimbursement<#break>
+                <#case 4>Completed<#break>
+                <#case 5>Deferred<#break>
+            </#switch></h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="#">Organizations</a></li>
+            <li class="breadcrumb-item"><a href="#">Projects</a></li>
         </ul>
     </div>
-    <div class="col-md-12">
-        <div class="tile">
-            <h3 class="tile-title">All joined organizations</h3>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th width="40%">Description</th>
-                        <th>Budget</th>
-                        <th>Create Time</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <#list orgList as org>
-                    <tr>
-                        <td>${org?counter}</td>
-                        <td>${org.name}</td>
-                        <td>${org.description}</td>
-                        <td>${org.budget}</td>
-                        <td>${org.createTime}</td>
-                        <td><button onclick="window.location.href='/wombataudit/general/organizations/${org.organizationId?c}'" class="btn btn-primary btn-sm" type="button">View</button></td>
-                    </tr>
-                    </#list>
-                    </tbody>
-                </table>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-md-10">
+            <div class="tile">
+                <h3 class="tile-title">Edit project</h3>
+                <div class="tile-body">
+                    <form enctype="application/x-www-form-urlencoded" method="post" action="/wombataudit/general/projects">
+                        <div class="form-group">
+                            <label class="control-label">Name</label>
+                            <input class="form-control" type="text" placeholder="Enter project name" name="name" value="${prj.name}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="demoSelect">Organization</label>
+                            <select class="form-control" id="demoSelect" name="orgId">
+                                <optgroup label="Select Organization">
+                            <#list orgList as org>
+                                <option value="${org.orgId?c}">${org.name}</option>
+                            </#list>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <textarea rows="4" class="form-control" placeholder="Enter project description" name="description">${prj.description}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Start Time</label>
+                            <input class="form-control" type="datetime-local" placeholder="Enter project start time" name="startTime">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">End Time</label>
+                            <input class="form-control" type="datetime-local" placeholder="Enter project end time" name="endTime">
+                        </div>
+                        <div class="tile-footer">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="/wombataudit/general/projects/${prj.prjId?c}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </main>
 <!-- Essential javascripts for application to work-->

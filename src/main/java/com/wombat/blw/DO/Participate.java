@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class Participate {
-    private int orgId;
-    private int userId;
-    private int role;
-    private Integer organizationId;
+
+    private Integer orgId;
+    private Integer userId;
+    private Integer role;
 }

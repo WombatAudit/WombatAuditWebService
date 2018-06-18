@@ -1,5 +1,6 @@
 package com.wombat.blw.Service;
 
+import com.wombat.blw.DO.User;
 import com.wombat.blw.DTO.MemberDTO;
 import com.wombat.blw.DTO.OrganizationDTO;
 import com.wombat.blw.DTO.SimpleOrganizationDTO;
@@ -19,7 +20,7 @@ public interface OrganizationService {
 
     OrganizationDTO getOne(Integer orgId);
 
-    List<MemberDTO> getMemberList(Integer orgId);
+    List<MemberDTO> findMembersInOrg(Integer orgId);
 
     void join(Integer orgId, Integer userId);
 
@@ -28,4 +29,6 @@ public interface OrganizationService {
     void remove(Integer orgId, Integer userId);
 
     List<SimpleOrganizationDTO> findSimpleManagedList(Integer userId);
+
+    User findManager(Integer orgId);
 }

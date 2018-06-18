@@ -1,6 +1,7 @@
 package com.wombat.blw.Service;
 
 import com.wombat.blw.DTO.DetailedAssignmentDTO;
+import com.wombat.blw.DTO.MemberDTO;
 import com.wombat.blw.DTO.SimpleAssignmentDTO;
 import com.wombat.blw.Form.ReceiptForm;
 
@@ -15,4 +16,10 @@ public interface AssignmentService {
     DetailedAssignmentDTO getDetail(Integer itemId);
 
     void updateReceipt(Integer itemId, ReceiptForm receiptForm);
+
+    void assign(Integer itemId, Integer userId);
+
+    List<MemberDTO> findAssignmentReceiver(Integer itemId);
+
+    List<MemberDTO> findMembersNotAssign(Integer orgId, Integer itemId);
 }

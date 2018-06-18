@@ -13,6 +13,7 @@ public class OrganizationDTO {
     private String description;
     private BigDecimal budget;
     private Date createTime;
+    private String manager;
 
     public OrganizationDTO(Integer organizationId, String name, String description, BigDecimal budget, Date createTime) {
         this.organizationId = organizationId;

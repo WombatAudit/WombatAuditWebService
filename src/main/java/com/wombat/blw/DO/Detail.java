@@ -4,7 +4,15 @@ import lombok.Data;
 
 @Data
 public class Detail {
-    private int prjId;
-    private int version;
-    private int itemId;
+
+    private Integer versionId;
+    private Integer itemId;
+
+    public Detail(Integer versionId, Integer itemId) {
+        this.versionId = versionId;
+        this.itemId = itemId;
+    }
+
+    public Detail() {
+    }
 }

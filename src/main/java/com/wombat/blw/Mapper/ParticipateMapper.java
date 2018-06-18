@@ -11,23 +11,15 @@ public interface ParticipateMapper {
 
     @Select("SELECT * FROM participate")
     @Results({
-            @Result(property = "organizationId", column = "org_id", javaType = Integer.class),
+            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
             @Result(property = "userId", column = "user_id", javaType = Integer.class),
             @Result(property = "role", column = "role", javaType = Integer.class)
     })
     List<Participate> getAll();
 
-    @Select("SELECT * FROM company WHERE org_id = #{organizationId} and user_id = #{userId}")
-    @Results({
-            @Result(property = "organizationId", column = "org_id", javaType = Integer.class),
-            @Result(property = "userId", column = "user_id", javaType = Integer.class),
-            @Result(property = "role", column = "role", javaType = Integer.class)
-    })
-    Participate selectByOrganizationIdAndUserId(Integer organizationId, Integer userId);
-
     @Select("SELECT * FROM participate WHERE org_id = #{organization}")
     @Results({
-            @Result(property = "organizationId", column = "org_id", javaType = Integer.class),
+            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
             @Result(property = "userId", column = "user_id", javaType = Integer.class),
             @Result(property = "role", column = "role", javaType = Integer.class)
     })
@@ -43,10 +35,25 @@ public interface ParticipateMapper {
     @Select("SELECT * FROM participate WHERE user_id not in  (SELECT * FROM participate WHERE org_id = " +
             "#{organization})")
     @Results({
-            @Result(property = "organizationId", column = "org_id", javaType = Integer.class),
+            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
             @Result(property = "userId", column = "user_id", javaType = Integer.class),
             @Result(property = "role", column = "role", javaType = Integer.class)
     })
     List<Participate> getSomeReverse(Integer organizationId);
 
+    @Select("select * from participate where user_id = #{userId} and org_id = #{orgId}")
+    @Results({
+            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
+            @Result(property = "userId", column = "user_id", javaType = Integer.class),
+            @Result(property = "role", column = "role", javaType = Integer.class)
+    })
+    Participate findOne(@Param("userId") Integer userId, @Param("orgId") Integer orgId);
+
+    @Select("select * from participate where org_id = #{orgId} and role = #{role}")
+    @Results({
+            @Result(property = "orgId", column = "org_id", javaType = Integer.class),
+            @Result(property = "userId", column = "user_id", javaType = Integer.class),
+            @Result(property = "role", column = "role", javaType = Integer.class)
+    })
+    List<Participate> findRoleOfOrg(@Param("orgId") Integer orgId, @Param("role") Integer role);
 }

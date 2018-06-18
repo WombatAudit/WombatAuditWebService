@@ -1,11 +1,16 @@
 package com.wombat.blw.Service.impl;
 
 import com.wombat.blw.DO.Company;
+import com.wombat.blw.DO.Participate;
+import com.wombat.blw.DO.Project;
 import com.wombat.blw.DO.User;
 import com.wombat.blw.DTO.SimpleUserDTO;
+import com.wombat.blw.Enum.OrgRoleEnum;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
 import com.wombat.blw.Mapper.CompanyMapper;
+import com.wombat.blw.Mapper.ParticipateMapper;
+import com.wombat.blw.Mapper.ProjectMapper;
 import com.wombat.blw.Mapper.UserMapper;
 import com.wombat.blw.Service.UserService;
 import org.springframework.beans.BeanUtils;
@@ -42,6 +47,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private CompanyMapper companyMapper;
 
+    @Autowired
+    private ParticipateMapper participateMapper;
+
+    @Autowired
+    private ProjectMapper projectMapper;
+
     @Override
     public User getOne(UserSignInForm userSignInForm) {
         User user = userMapper.findUserByUsername(userSignInForm.getUsername());
@@ -76,4 +87,15 @@ public class UserServiceImpl implements UserService {
         return new SimpleUserDTO(user.getUsername(), company.getName(), company.getCompanyId());
     }
 
+    @Override
+    public Boolean ifManagesOrg(Integer userId, Integer orgId) {
+        Participate participate = participateMapper.findOne(userId, orgId);
+        return participate.getRole().equals(OrgRoleEnum.MANAGER.getCode());
+    }
+
+    @Override
+    public Boolean ifManagesPrj(Integer userId, Integer prjId) {
+        Project project = projectMapper.findById(prjId);
+        return ifManagesOrg(userId, project.getOrgId());
+    }
 }

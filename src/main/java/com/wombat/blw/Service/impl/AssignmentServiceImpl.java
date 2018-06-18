@@ -3,9 +3,12 @@ package com.wombat.blw.Service.impl;
 import com.wombat.blw.DO.Assignment;
 import com.wombat.blw.DO.Item;
 import com.wombat.blw.DO.Receipt;
+import com.wombat.blw.DO.User;
 import com.wombat.blw.DTO.DetailedAssignmentDTO;
+import com.wombat.blw.DTO.MemberDTO;
 import com.wombat.blw.DTO.ReceiptDTO;
 import com.wombat.blw.DTO.SimpleAssignmentDTO;
+import com.wombat.blw.Enum.AssignmentStatusEnum;
 import com.wombat.blw.Form.ReceiptForm;
 import com.wombat.blw.Mapper.*;
 import com.wombat.blw.Service.AssignmentService;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AssignmentServiceImpl implements AssignmentService {
@@ -73,7 +77,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public DetailedAssignmentDTO getDetail(Integer itemId) {
-        Item item = itemMapper.getItemByItemId(itemId);
+        Item item = itemMapper.findOneById(itemId);
         Receipt receipt = receiptMapper.getReceiptByRcptId(item.getRcptId());
         ReceiptDTO receiptDTO = new ReceiptDTO();
         receiptDTO.setRcptId(receipt.getRcptId());
@@ -93,7 +97,27 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public void updateReceipt(Integer itemId, ReceiptForm receiptForm) {
-        Item item = itemMapper.getItemByItemId(itemId);
+        Item item = itemMapper.findOneById(itemId);
         receiptMapper.updateReceipt(item.getRcptId(), receiptForm);
+    }
+
+    @Override
+    public void assign(Integer itemId, Integer userId) {
+        Assignment assignment = new Assignment(userId, itemId);
+        assignment.setStatus(AssignmentStatusEnum.IN_PROGRESS.getCode());
+        assignmentMapper.create(assignment);
+    }
+
+    @Override
+    public List<MemberDTO> findAssignmentReceiver(Integer itemId) {
+        List<Assignment> assignmentList = assignmentMapper.getListByItemId(itemId);
+        return assignmentList.stream().map(e -> new MemberDTO(e.getUserId(), userMapper.findRealNameByUserId(e.getUserId())))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MemberDTO> findMembersNotAssign(Integer orgId, Integer itemId) {
+        List<User> userList = userMapper.findGeneralMembersInOrgNotAssigned(orgId, itemId);
+        return userList.stream().map(e -> new MemberDTO(e.getUserId(), e.getRealName())).collect(Collectors.toList());
     }
 }
