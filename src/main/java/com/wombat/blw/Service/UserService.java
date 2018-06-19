@@ -5,6 +5,8 @@ import com.wombat.blw.DTO.SimpleUserDTO;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
 
+import java.util.List;
+
 public interface UserService {
 
     User getOne(UserSignInForm userSignInForm);
@@ -18,4 +20,8 @@ public interface UserService {
     Boolean ifManagesPrj(Integer userId, Integer prjId);
 
     User findReceiptSubmitter(Integer rcptId);
+
+    List<Integer> findAdminIdList(Integer coId);
+
+    String findRealName(Integer userId);
 }

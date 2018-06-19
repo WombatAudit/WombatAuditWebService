@@ -42,4 +42,5 @@ public interface CompanyMapper {
 
     @Delete("DELETE FROM company WHERE co_id = #{companyId}")
     void delete(Integer companyId);
+
 }

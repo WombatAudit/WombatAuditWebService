@@ -45,8 +45,8 @@ public class FileUtil {
     }
 
     public static String imageUpload(MultipartFile file) {
-//        return fileUpload(file, UPLOAD_DIRECTORY, IMAGE_TYPES);
-        return imageUploadTest(file);
+        return fileUpload(file, UPLOAD_DIRECTORY, IMAGE_TYPES);
+//        return imageUploadTest(file);
     }
 
     public static String imageUploadTest(MultipartFile file) {

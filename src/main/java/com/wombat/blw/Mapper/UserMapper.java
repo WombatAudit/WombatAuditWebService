@@ -76,5 +76,16 @@ public interface UserMapper {
             @Result(property = "createTime", column = "create_time", javaType = Date.class)
     })
     List<User> findGeneralMembersInOrgNotAssigned(@Param("orgId") Integer orgId, @Param("itemId") Integer itemId);
+
+    @Select("select * from user where co_id = #{coId} and role = #{role}")
+    @Results({
+            @Result(property = "companyId", column = "co_id", javaType = Integer.class),
+            @Result(property = "name", column = "name", javaType = String.class),
+            @Result(property = "description", column = "description", javaType = String.class),
+            @Result(property = "taxId", column = "tax_id", javaType = String.class),
+            @Result(property = "accountBank", column = "account_bank", javaType = String.class),
+            @Result(property = "account", column = "account", javaType = BigDecimal.class)
+    })
+    List<User> findUserListInCompanyOfRole(@Param("coId") Integer coId, @Param("role") Integer role);
 }
 

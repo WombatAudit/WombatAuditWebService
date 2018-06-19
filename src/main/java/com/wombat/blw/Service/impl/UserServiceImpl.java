@@ -5,6 +5,7 @@ import com.wombat.blw.DO.Participate;
 import com.wombat.blw.DO.Project;
 import com.wombat.blw.DO.User;
 import com.wombat.blw.DTO.SimpleUserDTO;
+import com.wombat.blw.Enum.CompanyRoleEnum;
 import com.wombat.blw.Enum.OrgRoleEnum;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
@@ -13,6 +14,9 @@ import com.wombat.blw.Service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -103,5 +107,16 @@ public class UserServiceImpl implements UserService {
     public User findReceiptSubmitter(Integer rcptId) {
         Integer userId = receiptMapper.findUserIdByRcptId(rcptId);
         return userMapper.findUserByUserId(userId);
+    }
+
+    @Override
+    public List<Integer> findAdminIdList(Integer coId) {
+        List<User> userList = userMapper.findUserListInCompanyOfRole(coId, CompanyRoleEnum.ADMIN.getCode());
+        return userList.stream().map(e -> e.getUserId()).collect(Collectors.toList());
+    }
+
+    @Override
+    public String findRealName(Integer userId) {
+        return userMapper.findRealNameByUserId(userId);
     }
 }

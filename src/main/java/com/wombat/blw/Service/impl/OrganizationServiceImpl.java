@@ -130,4 +130,9 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
         return userMapper.findUserByUserId(participateList.get(0).getUserId());
     }
+
+    @Override
+    public String findOrgName(Integer orgId) {
+        return organizationMapper.findOrgNameById(orgId);
+    }
 }

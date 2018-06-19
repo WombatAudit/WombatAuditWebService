@@ -1,8 +1,11 @@
 package com.wombat.blw.Controller;
 
+import com.wombat.blw.Constant.MessageConstant;
+import com.wombat.blw.DO.User;
 import com.wombat.blw.DTO.*;
 import com.wombat.blw.Enum.ProjectStatusEnum;
 import com.wombat.blw.Exception.ProjectStatusException;
+import com.wombat.blw.Form.NotificationForm;
 import com.wombat.blw.Service.*;
 import com.wombat.blw.Util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @Slf4j
@@ -38,6 +43,9 @@ public class AdminUserPageController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping("/admin/organizations")
     public ModelAndView adminOrganizations(Map<String, Object> map, HttpServletRequest request) {
@@ -133,33 +141,54 @@ public class AdminUserPageController {
     }
 
     @GetMapping("/admin/projects/{prjId}/actions/accept")
-    public ModelAndView adminAcceptProject(@PathVariable("prjId") Integer prjId, String feedback) {
+    public ModelAndView adminAcceptProject(HttpServletRequest request, @PathVariable("prjId") Integer prjId, String feedback) {
         // Todo Deal with the feedback
-
         SimpleProjectDTO simpleProjectDTO = projectService.findSimpleOne(prjId);
+        String message;
         if (simpleProjectDTO.getStatus().equals(ProjectStatusEnum.REQUEST_CREATION.getCode())) {
             projectService.updateStatus(prjId, ProjectStatusEnum.IN_PROGRESS.getCode());
+            message = String.format(MessageConstant.PROJECT_CREATION_REQUEST_ACCEPTED_PATTERN, projectService.findPrjName(prjId), feedback);
         } else if (simpleProjectDTO.getStatus().equals(ProjectStatusEnum.REQUEST_REIMBURSEMENT.getCode())) {
             projectService.updateStatus(prjId, ProjectStatusEnum.COMPLETED.getCode());
+            message = String.format(MessageConstant.PROJECT_REIMBURSEMENT_REQUEST_ACCEPTED_PATTERN, projectService.findPrjName(prjId), feedback);
         } else {
             throw new ProjectStatusException();
         }
+        NotificationForm notificationForm = new NotificationForm();
+        notificationForm.setContent(message);
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        notificationForm.setSenderId(userId);
+        notificationForm.setReceiveListId(UUID.randomUUID().toString());
+        List<Integer> receiverIdList = new ArrayList<>();
+        User user = organizationService.findManager(simpleProjectDTO.getOrgId());
+        receiverIdList.add(user.getUserId());
+        messageService.sendMessage(notificationForm, receiverIdList);
         return new ModelAndView("redirect:/admin/projects/" + prjId);
     }
 
     @GetMapping("/admin/projects/{prjId}/actions/reject")
     public ModelAndView adminRejectProject(Map<String, Object> map, HttpServletRequest request, @PathVariable("prjId") Integer prjId, String feedback) {
         // Todo Deal with the feedback
-
         SimpleProjectDTO simpleProjectDTO = projectService.findSimpleOne(prjId);
+        String message;
         if (simpleProjectDTO.getStatus().equals(ProjectStatusEnum.REQUEST_CREATION.getCode())) {
             projectService.updateStatus(prjId, ProjectStatusEnum.NOT_STARTED.getCode());
+            message = String.format(MessageConstant.PROJECT_CREATION_REQUEST_REJECTED_PATTERN, projectService.findPrjName(prjId), feedback);
         } else if (simpleProjectDTO.getStatus().equals(ProjectStatusEnum.REQUEST_REIMBURSEMENT.getCode())) {
             projectService.updateStatus(prjId, ProjectStatusEnum.IN_PROGRESS.getCode());
+            message = String.format(MessageConstant.PROJECT_REIMBURSEMENT_REQUEST_REJECTED_PATTERN, projectService.findPrjName(prjId), feedback);
         } else {
             throw new ProjectStatusException();
         }
+        NotificationForm notificationForm = new NotificationForm();
+        notificationForm.setContent(message);
         Integer userId = UserUtil.getUserId(request, redisTemplate);
+        notificationForm.setSenderId(userId);
+        notificationForm.setReceiveListId(UUID.randomUUID().toString());
+        List<Integer> receiverIdList = new ArrayList<>();
+        User user = organizationService.findManager(simpleProjectDTO.getOrgId());
+        receiverIdList.add(user.getUserId());
+        messageService.sendMessage(notificationForm, receiverIdList);
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
         map.put("message", "Successfully review");

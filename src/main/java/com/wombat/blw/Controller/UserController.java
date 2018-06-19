@@ -16,7 +16,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,10 +50,10 @@ public class UserController {
                 user.getUserId().toString(), RedisConstant.EXPIRE_TIME, TimeUnit.SECONDS);
         CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE_TIME);
         if (EnumUtil.getByCode(user.getRole(), CompanyRoleEnum.class) == CompanyRoleEnum.GENERAL) {
-            //TODO Go to General user page
-
+            // Go to General user page
+            return new ModelAndView("redirect:/general/organizations");
         } else if (EnumUtil.getByCode(user.getRole(), CompanyRoleEnum.class) == CompanyRoleEnum.ADMIN) {
-            //TODO Go to Admin user page
+            // Go to Admin user page
             return new ModelAndView("redirect:/admin/organizations");
         }
         return new ModelAndView("test");
@@ -73,10 +72,10 @@ public class UserController {
                 user.getUserId().toString(), RedisConstant.EXPIRE_TIME, TimeUnit.SECONDS);
         CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE_TIME);
         if (EnumUtil.getByCode(user.getRole(), CompanyRoleEnum.class) == CompanyRoleEnum.GENERAL) {
-            //TODO Go to General user page
+            // Go to General user page
             return new ModelAndView("redirect:/general/organizations");
         } else if (EnumUtil.getByCode(user.getRole(), CompanyRoleEnum.class) == CompanyRoleEnum.ADMIN) {
-            //TODO Go to Admin user page
+            // Go to Admin user page
             return new ModelAndView("redirect:/admin/organizations");
         }
         return new ModelAndView("test");
@@ -93,4 +92,5 @@ public class UserController {
         map.put("url", "/wombataudit");
         return new ModelAndView("common/success", map);
     }
+    
 }

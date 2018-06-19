@@ -1,15 +1,13 @@
 package com.wombat.blw.Controller;
 
+import com.wombat.blw.Constant.MessageConstant;
 import com.wombat.blw.DO.User;
 import com.wombat.blw.DTO.*;
 import com.wombat.blw.Enum.AssignmentStatusEnum;
 import com.wombat.blw.Enum.ProjectStatusEnum;
 import com.wombat.blw.Exception.InvalidParameterException;
 import com.wombat.blw.Exception.ProjectStatusException;
-import com.wombat.blw.Form.ItemForm;
-import com.wombat.blw.Form.OrganizationForm;
-import com.wombat.blw.Form.ProjectForm;
-import com.wombat.blw.Form.ReceiptForm;
+import com.wombat.blw.Form.*;
 import com.wombat.blw.Service.*;
 import com.wombat.blw.Util.FileUtil;
 import com.wombat.blw.Util.UserUtil;
@@ -26,8 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @Slf4j
@@ -50,6 +50,9 @@ public class GeneralUserPageController {
 
     @Autowired
     private AssignmentService assignmentService;
+
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping("/general/organizations")
     public ModelAndView generalOrganizations(Map<String, Object> map, HttpServletRequest request) {
@@ -111,14 +114,24 @@ public class GeneralUserPageController {
     }
 
     @PostMapping("/general/organizations/{id}/actions/invite")
-    public ModelAndView generalOrganizationInvite(Integer memberId, @PathVariable("id") Integer orgId) {
+    public ModelAndView generalOrganizationInvite(HttpServletRequest request, Integer memberId, @PathVariable("id") Integer orgId) {
         organizationService.join(orgId, memberId);
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        NotificationForm notificationForm = new NotificationForm();
+        notificationForm.setSenderId(userId);
+        notificationForm.setReceiveListId(UUID.randomUUID().toString());
+        notificationForm.setContent(String.format(MessageConstant.ORGANIZATION_INVITE_PATTERN, userService.findRealName(userId),
+                organizationService.findOrgName(orgId)));
+        List<Integer> receiverIdList = new ArrayList<>();
+        receiverIdList.add(memberId);
+        messageService.sendMessage(notificationForm, receiverIdList);
         return new ModelAndView("redirect:/general/organizations/" + orgId);
     }
 
     @PostMapping("/general/organizations/{id}/actions/remove")
     public ModelAndView generalOrganizationsRemove(Integer memberId, @PathVariable("id") Integer orgId) {
         organizationService.remove(orgId, memberId);
+        //TODO notify
         return new ModelAndView("redirect:/general/organizations" + orgId);
     }
 
@@ -170,17 +183,25 @@ public class GeneralUserPageController {
     }
 
     @GetMapping("/general/projects/{prjId}/actions/request")
-    public ModelAndView generalDetailedProjectVersion(@PathVariable("prjId") Integer prjId) {
+    public ModelAndView generalDetailedProjectVersion(HttpServletRequest request, @PathVariable("prjId") Integer prjId) {
         ProjectDTO projectDTO = projectService.findOne(prjId);
+        String message;
         if (projectDTO.getStatus().equals(ProjectStatusEnum.NOT_STARTED.getCode())) {
             projectService.updateStatus(prjId, ProjectStatusEnum.REQUEST_CREATION.getCode());
-            //TODO notify
+            message = MessageConstant.NEW_PROJECT_CREATION_REQUEST;
         } else if (projectDTO.getStatus().equals(ProjectStatusEnum.IN_PROGRESS.getCode())) {
             projectService.updateStatus(prjId, ProjectStatusEnum.REQUEST_REIMBURSEMENT.getCode());
-            //TODO notify
+            message = MessageConstant.NEW_PROJECT_REIMBURSEMENT_REQUEST;
         } else {
             throw new ProjectStatusException();
         }
+        NotificationForm notificationForm = new NotificationForm();
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        notificationForm.setSenderId(userId);
+        notificationForm.setReceiveListId(UUID.randomUUID().toString());
+        notificationForm.setContent(message);
+        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
+        messageService.sendMessage(notificationForm, userService.findAdminIdList(simpleUserDTO.getCompanyId()));
         return new ModelAndView("redirect:/general/projects/" + prjId);
     }
 
@@ -293,6 +314,13 @@ public class GeneralUserPageController {
     public ModelAndView generalItemAssign(HttpServletRequest request, @PathVariable("itemId") Integer itemId, @PathVariable("prjId") Integer prjId, Integer assigneeId) {
         Integer userId = UserUtil.getUserId(request, redisTemplate);
         assignmentService.create(itemId, assigneeId, userId);
+        NotificationForm notificationForm = new NotificationForm();
+        notificationForm.setSenderId(userId);
+        notificationForm.setContent(MessageConstant.NEW_ASSIGNMENT);
+        notificationForm.setReceiveListId(UUID.randomUUID().toString());
+        List<Integer> receivedIdList = new ArrayList<>();
+        receivedIdList.add(assigneeId);
+        messageService.sendMessage(notificationForm, receivedIdList);
         return new ModelAndView("redirect:/general/projects/" + prjId);
     }
 

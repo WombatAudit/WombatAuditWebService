@@ -182,4 +182,9 @@ public class ProjectServiceImpl implements ProjectService {
     public void updateVersion(Integer prjId, Integer versionId) {
         projectMapper.updateProjectVersion(prjId, versionId);
     }
+
+    @Override
+    public String findPrjName(Integer prjId) {
+        return projectMapper.findPrjName(prjId);
+    }
 }

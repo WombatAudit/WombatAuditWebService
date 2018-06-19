@@ -83,4 +83,5 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyMapper.selectByCompanyId(user.getCompanyId());
         return new SimpleCompanyDTO(company.getCompanyId(), company.getName());
     }
+
 }

@@ -36,4 +36,6 @@ public interface ProjectService {
     List<VersionDTO> findVersionList(Integer prjId);
 
     void updateVersion(Integer prjId, Integer versionId);
+
+    String findPrjName(Integer prjId);
 }

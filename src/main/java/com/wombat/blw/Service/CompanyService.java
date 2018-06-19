@@ -19,4 +19,5 @@ public interface CompanyService {
     Integer getCoId(Integer userId);
 
     SimpleCompanyDTO findSimpleOne(Integer userId);
+
 }

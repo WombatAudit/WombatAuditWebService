@@ -31,4 +31,6 @@ public interface OrganizationService {
     List<SimpleOrganizationDTO> findSimpleManagedList(Integer userId);
 
     User findManager(Integer orgId);
+
+    String findOrgName(Integer orgId);
 }
