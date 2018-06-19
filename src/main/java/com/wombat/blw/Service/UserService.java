@@ -16,4 +16,6 @@ public interface UserService {
     Boolean ifManagesOrg(Integer userId, Integer orgId);
 
     Boolean ifManagesPrj(Integer userId, Integer prjId);
+
+    User findReceiptSubmitter(Integer rcptId);
 }

@@ -6,7 +6,10 @@ import lombok.Getter;
 public enum AssignmentStatusEnum implements CodeEnum {
 
     IN_PROGRESS(0, "进行中"),
-    COMPLETED(1, "已完成");
+    SUBMITTED(1, "已提交"),
+    CHECKING(2, "正在审核"),
+    COMPLETED(3, "已完成"),
+    DEFERRED(4, "已延期");
 
     private Integer code;
     private String message;

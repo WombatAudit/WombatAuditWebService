@@ -35,4 +35,11 @@ public interface ItemMapper {
 
     @Delete("delete from detail where version_id = #{versionId} and item_id = #{itemId}")
     void deleteDetail(Detail detail);
+
+    @Select("select prj_id from assignment natural join detail natural join project_version where item_id = #{itemId}")
+    @ResultType(Integer.class)
+    Integer findItemPrjId(Integer itemId);
+
+    @Update("update item set rcpt_id = #{rcptId} where item_id = #{itemId}")
+    void updateItemReceipt(@Param("rcptId") Integer rcptId, @Param("itemId") Integer itemId);
 }

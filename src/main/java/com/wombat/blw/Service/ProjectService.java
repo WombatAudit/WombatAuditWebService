@@ -28,4 +28,8 @@ public interface ProjectService {
     ProjectDTO findOne(Integer prjId);
 
     GeneralDetailedProjectDTO findGeneralDetailedProject(Integer prjId);
+
+    GeneralDetailedProjectDTO findDetailedProjectByVersionId(Integer prjId,Integer versionId);
+
+    int addVersionByProject(int prjId,String tag);
 }

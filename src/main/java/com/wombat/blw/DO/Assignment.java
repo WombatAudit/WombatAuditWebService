@@ -7,15 +7,11 @@ import java.util.Date;
 @Data
 public class Assignment {
 
-    private Integer userId;
+    private Integer assignerId;
+    private Integer assigneeId;
     private Integer itemId;
     private Integer status;
     private Date startTime;
-
-    public Assignment(Integer userId, Integer itemId) {
-        this.userId = userId;
-        this.itemId = itemId;
-    }
 
     public Assignment() {
     }

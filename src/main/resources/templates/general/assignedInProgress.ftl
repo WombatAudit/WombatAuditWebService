@@ -41,19 +41,19 @@
                 <li><a class="treeview-item" href="/wombataudit/general/organizations"><i class="icon fa fa-circle-o"></i> My organizations</a></li>
             </ul>
         </li>
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Projects</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Projects</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="/wombataudit/general/projects/pages/create"><i class="icon fa fa-circle-o"></i> Create a project</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/notStarted"><i class="icon fa fa-circle-o"></i> Not started</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/toCreate"><i class="icon fa fa-circle-o"></i> Request to create</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/inProgress"><i class="icon fa fa-circle-o"></i> In progress</a></li>
-                <li><a class="treeview-item active" href="/wombataudit/general/projects/deferred"><i class="icon fa fa-circle-o"></i> Deferred</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/deferred"><i class="icon fa fa-circle-o"></i> Deferred</a></li>
             </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Assignments</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Assignments</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/inProgress"><i class="icon fa fa-circle-o"></i> Assigned in Progress</a></li>
+                <li><a class="treeview-item active" href="/wombataudit/general/assignments/pages/assigned/inProgress"><i class="icon fa fa-circle-o"></i> Assigned in Progress</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/completed"><i class="icon fa fa-circle-o"></i> Assigned Completed</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/inProgress"><i class="icon fa fa-circle-o"></i> Received in Progress</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/completed"><i class="icon fa fa-circle-o"></i> Received Completed</a></li>
@@ -61,48 +61,52 @@
         </li>
     </ul>
 </aside>
-
 <main class="app-content">
     <div class="app-title">
         <div class="div">
-            <h1><i class="fa fa-laptop"></i> Projects</h1>
+            <h1><i class="fa fa-laptop"></i> Assigned</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="#">Projects</a></li>
+            <li class="breadcrumb-item"><a href="#">Assignments</a></li>
         </ul>
     </div>
     <div class="col-md-12">
         <div class="tile">
-            <h3 class="tile-title">All deferred projects</h3>
+            <h3 class="tile-title">Assignments In Progress</h3>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Organization Name</th>
+                        <th>Project</th>
+                        <th>Assignee</th>
                         <th>Start Time</th>
-                        <th>End Time</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <#list prjList as prj>
-                    <tr>
-                        <td>${prj?counter}</td>
-                        <td>${prj.name}</td>
-                        <td>${prj.orgName}</td>
-                        <td>${prj.startTime?datetime}</td>
-                        <td>${prj.endTime?datetime}</td>
-                        <td><button onclick="window.location.href='/wombataudit/general/projects/${prj.prjId?c}'" class="btn btn-primary btn-sm" type="button">View</button></td>
-                    </tr>
-                    </#list>
+                        <#list assignmentList as assignment>
+                            <tr>
+                                <td>${assignment?counter}</td>
+                                <td>${assignment.itemName}</td>
+                                <td>${assignment.prjName}</td>
+                                <td>${assignment.assigneeRealName}</td>
+                                <td>${assignment.startTime?datetime}</td>
+                                <td>${assignment.quantity}</td>
+                                <td>${assignment.amount}</td>
+                                <td>
+                                    <button onclick="window.location.href='/wombataudit/general/projects/${assignment.prjId?c}/items/${assignment.itemId}'" class="btn btn-primary btn-sm" type="button">View</button>
+                                </td>
+                            </tr>
+                        </#list>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
     </div>
 </main>
 <!-- Essential javascripts for application to work-->

@@ -144,4 +144,31 @@ public class ProjectServiceImpl implements ProjectService {
         generalDetailedProjectDTO.setItemDTOList(itemDTOList);
         return generalDetailedProjectDTO;
     }
+
+    @Override
+    public int addVersionByProject(int prjId, String tag) {
+        Version version=new Version();
+        version.setTag(tag);
+        projectMapper.createVersion(version);
+        projectMapper.addProjectVersion(version.getVersionId(),prjId);
+        return version.getVersionId();
+    }
+
+    @Override
+    public GeneralDetailedProjectDTO findDetailedProjectByVersionId(Integer prjId,Integer versionId) {
+        Project project = projectMapper.findById(prjId);
+        GeneralDetailedProjectDTO generalDetailedProjectDTO = new GeneralDetailedProjectDTO();
+        BeanUtils.copyProperties(project, generalDetailedProjectDTO);
+        generalDetailedProjectDTO.setOrgName(organizationMapper.findOrgNameById(project.getOrgId()));
+        Version version = projectMapper.findVersion(versionId);
+        generalDetailedProjectDTO.setVersionId(version.getVersionId());
+        generalDetailedProjectDTO.setVersionTag(version.getTag());
+        generalDetailedProjectDTO.setVersionTime(version.getCreateTime());
+        List<Item> itemList = projectMapper.findItems(version.getVersionId());
+        List<ItemDTO> itemDTOList = itemList.stream().map(e -> new ItemDTO(e.getItemId(), e.getType(),
+                e.getName(), e.getDescription(), e.getQuantity(), e.getAmount(), projectMapper.findPrjName(prjId), prjId))
+                .collect(Collectors.toList());
+        generalDetailedProjectDTO.setItemDTOList(itemDTOList);
+        return generalDetailedProjectDTO;
+    }
 }

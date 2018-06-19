@@ -62,7 +62,7 @@ public interface UserMapper {
     List<User> findGeneralMembersOfCompanyNotIn(@Param("coId") Integer coId, @Param("orgId") Integer orgId);
 
     @Select("select * from user join participate on user.user_id = participate.user_id where org_id = #{orgId} and user.user_id not in " +
-            "(select user_id from assignment where item_id = #{itemId})")
+            "(select assignee_id from assignment where item_id = #{itemId})")
     @Results({
             @Result(property = "userId", column = "user_id", javaType = Integer.class),
             @Result(property = "username", column = "username", javaType = String.class),

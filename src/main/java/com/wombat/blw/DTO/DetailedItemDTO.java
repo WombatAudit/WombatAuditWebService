@@ -13,9 +13,12 @@ public class DetailedItemDTO {
     private String description;
     private Integer quantity;
     private BigDecimal amount;
+    private Integer rcptId;
     private String receipt;
     private String invoice;
     private String transaction;
     private String attachment;
     private String prjName;
+    private Integer prjId;
+    private String orgName;
 }

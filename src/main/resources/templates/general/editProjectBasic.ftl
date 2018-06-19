@@ -53,8 +53,10 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Assignments</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned"><i class="icon fa fa-circle-o"></i> Assigned</a></li>
-                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received"><i class="icon fa fa-circle-o"></i> Received</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/inProgress"><i class="icon fa fa-circle-o"></i> Assigned in Progress</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/completed"><i class="icon fa fa-circle-o"></i> Assigned Completed</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/inProgress"><i class="icon fa fa-circle-o"></i> Received in Progress</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/completed"><i class="icon fa fa-circle-o"></i> Received Completed</a></li>
             </ul>
         </li>
     </ul>

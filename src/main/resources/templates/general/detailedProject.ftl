@@ -53,8 +53,10 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Assignments</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned"><i class="icon fa fa-circle-o"></i> Assigned</a></li>
-                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received"><i class="icon fa fa-circle-o"></i> Received</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/inProgress"><i class="icon fa fa-circle-o"></i> Assigned in Progress</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/completed"><i class="icon fa fa-circle-o"></i> Assigned Completed</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/inProgress"><i class="icon fa fa-circle-o"></i> Received in Progress</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/completed"><i class="icon fa fa-circle-o"></i> Received Completed</a></li>
             </ul>
         </li>
     </ul>
@@ -168,6 +170,28 @@
                 </div>
             </div>
         </div>
+        <div id="add-version" class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="tile">
+                    <h3 class="tile-title">Add New Version</h3>
+                    <div class="tile-body">
+                        <form method="post" enctype="application/x-www-form-urlencoded" action="/wombataudit/general/projects/${prj.prjId?c}/versions">
+                            <div class="row">
+                                <div class="form-group col-md-10">
+                                    <label class="control-label">Tag</label>
+                                    <input class="form-control" type="text" placeholder="Enter tag" name="tag">
+                                </div>
+                            </div>
+                            <div class="tile-footer">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>&nbsp;&nbsp;&nbsp;
+                                <button id="bt-cancel-add-version" class="btn btn-secondary" type="button"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </#if>
     <#switch prj.status>
         <#case 0>
@@ -275,11 +299,18 @@
     <script>
         $(document).ready(function () {
             $("#add-item").hide();
+            $("#add-version").hide();
             $("#bt-add-item").click(function () {
                 $("#add-item").show();
             });
             $("#bt-cancel-add-item").click(function () {
                 $("#add-item").hide();
+            })
+            $("#bt-add-version").click(function () {
+                $("#add-version").show();
+            });
+            $("#bt-cancel-add-version").click(function () {
+                $("#add-version").hide();
             })
         })
     </script>

@@ -1,12 +1,16 @@
 package com.wombat.blw.Controller;
 
+import com.wombat.blw.DO.User;
 import com.wombat.blw.DTO.*;
+import com.wombat.blw.Enum.AssignmentStatusEnum;
 import com.wombat.blw.Enum.ProjectStatusEnum;
 import com.wombat.blw.Exception.InvalidParameterException;
 import com.wombat.blw.Form.ItemForm;
 import com.wombat.blw.Form.OrganizationForm;
 import com.wombat.blw.Form.ProjectForm;
+import com.wombat.blw.Form.ReceiptForm;
 import com.wombat.blw.Service.*;
+import com.wombat.blw.Util.FileUtil;
 import com.wombat.blw.Util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -225,6 +230,25 @@ public class GeneralUserPageController {
         return new ModelAndView("redirect:/general/projects/" + prjId);
     }
 
+    @GetMapping("/general/projects/{id}/{versionId}")
+    public ModelAndView generalDetailedProjectVersion(Map<String, Object> map, HttpServletRequest request, @PathVariable("id") Integer prjId, @PathVariable("versionId") Integer versionId) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
+        map.put("user", simpleUserDTO);
+        GeneralDetailedProjectDTO generalDetailedProjectDTO = projectService.findDetailedProjectByVersionId(prjId,versionId);
+        map.put("prj", generalDetailedProjectDTO);
+        if (userService.ifManagesPrj(userId, generalDetailedProjectDTO.getPrjId())) {
+            map.put("manage", "Yes");
+        }
+        return new ModelAndView("general/detailedProject", map);
+    }
+
+    @PostMapping("/general/projects/{id}/versions")
+    public ModelAndView generalProjectsVersionCreate(@PathVariable("id") Integer prjId, String tag){
+        int versionId=projectService.addVersionByProject(prjId,tag);
+        return new ModelAndView("redirect:/general/projects/"+prjId+"/"+versionId);
+    }
+
     @GetMapping("/general/projects/{prjId}/{versionId}/items/{itemId}/actions/delete")
     public ModelAndView generalDeleteItem(@PathVariable("versionId") Integer versionId, @PathVariable("prjId") Integer prjId, @PathVariable("itemId") Integer itemId) {
         itemService.deleteItemFromDetail(versionId, itemId);
@@ -241,7 +265,7 @@ public class GeneralUserPageController {
         SimpleProjectDTO simpleProjectDTO = projectService.findSimpleOne(prjId);
         List<MemberDTO> memberDTOList = assignmentService.findMembersNotAssign(simpleProjectDTO.getOrgId(), itemId);
         map.put("memberList", memberDTOList);
-        List<MemberDTO> receiverList = assignmentService.findAssignmentReceiver(itemId);
+        List<MemberDTO> receiverList = assignmentService.findAssigneeList(itemId);
         if (receiverList != null && receiverList.size() != 0) {
             map.put("receiverList", receiverList);
         }
@@ -249,8 +273,9 @@ public class GeneralUserPageController {
     }
 
     @PostMapping("/general/projects/{prjId}/items/{itemId}/actions/assign")
-    public ModelAndView generalItemAssign(@PathVariable("itemId") Integer itemId, @PathVariable("prjId") Integer prjId, Integer userId) {
-        assignmentService.assign(itemId, userId);
+    public ModelAndView generalItemAssign(HttpServletRequest request, @PathVariable("itemId") Integer itemId, @PathVariable("prjId") Integer prjId, Integer assigneeId) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        assignmentService.create(itemId, assigneeId, userId);
         return new ModelAndView("redirect:/general/projects/" + prjId);
     }
 
@@ -261,18 +286,95 @@ public class GeneralUserPageController {
         map.put("user", simpleUserDTO);
         DetailedItemDTO detailedItemDTO = itemService.findDetailedItem(prjId, itemId);
         map.put("item", detailedItemDTO);
-        List<MemberDTO> receiverList = assignmentService.findAssignmentReceiver(itemId);
+        List<MemberDTO> receiverList = assignmentService.findAssigneeList(itemId);
         if (receiverList != null && receiverList.size() != 0) {
             map.put("receiverList", receiverList);
+        }
+        User user = userService.findReceiptSubmitter(detailedItemDTO.getRcptId());
+        if (user != null) {
+            map.put("submitter", user.getRealName());
         }
         return new ModelAndView("general/detailedItem", map);
     }
 
     @GetMapping("/general/assignments/pages/assigned/inProgress")
-    public ModelAndView generalPageAssigned(Map<String, Object> map, HttpServletRequest request) {
+    public ModelAndView generalPageAssignedInProgress(Map<String, Object> map, HttpServletRequest request) {
         Integer userId = UserUtil.getUserId(request, redisTemplate);
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
-        return new ModelAndView("general/assigned", map);
+        List<SimpleAssignmentDTO> simpleAssignmentDTOList = assignmentService.findSimpleAssignedInStatus(userId, AssignmentStatusEnum.IN_PROGRESS.getCode());
+        map.put("assignmentList", simpleAssignmentDTOList);
+        return new ModelAndView("general/assignedInProgress", map);
+    }
+
+    @GetMapping("/general/assignments/pages/assigned/completed")
+    public ModelAndView generalPageAssignedCompleted(Map<String, Object> map, HttpServletRequest request) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
+        map.put("user", simpleUserDTO);
+        List<SimpleAssignmentDTO> simpleAssignmentDTOList = assignmentService.findSimpleAssignedInStatus(userId, AssignmentStatusEnum.COMPLETED.getCode());
+        map.put("assignmentList", simpleAssignmentDTOList);
+        return new ModelAndView("general/assignedCompleted", map);
+    }
+
+    @GetMapping("/general/assignments/pages/received/inProgress")
+    public ModelAndView generalPageReceivedInProgress(Map<String, Object> map, HttpServletRequest request) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
+        map.put("user", simpleUserDTO);
+        List<SimpleAssignmentDTO> simpleAssignmentDTOList = assignmentService.findSimpleReceivedInStatus(userId, AssignmentStatusEnum.IN_PROGRESS.getCode());
+        map.put("assignmentList", simpleAssignmentDTOList);
+        return new ModelAndView("general/receivedInProgress", map);
+    }
+
+    @GetMapping("/general/assignments/pages/received/completed")
+    public ModelAndView generalPageReceivedCompleted(Map<String, Object> map, HttpServletRequest request) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
+        map.put("user", simpleUserDTO);
+        List<SimpleAssignmentDTO> simpleAssignmentDTOList = assignmentService.findSimpleReceivedInStatus(userId, AssignmentStatusEnum.COMPLETED.getCode());
+        map.put("assignmentList", simpleAssignmentDTOList);
+        return new ModelAndView("general/receivedCompleted", map);
+    }
+
+    @GetMapping("/general/assignments/{prjId}/{itemId}/pages/submit")
+    public ModelAndView generalDetailedItemSubmit(Map<String, Object> map, HttpServletRequest request, @PathVariable("itemId") Integer itemId, @PathVariable("prjId") Integer prjId) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
+        map.put("user", simpleUserDTO);
+        DetailedItemDTO detailedItemDTO = itemService.findDetailedItem(prjId, itemId);
+        map.put("item", detailedItemDTO);
+        List<MemberDTO> receiverList = assignmentService.findAssigneeList(itemId);
+        if (receiverList != null && receiverList.size() != 0) {
+            map.put("receiverList", receiverList);
+        }
+        User user = userService.findReceiptSubmitter(detailedItemDTO.getRcptId());
+        if (user != null) {
+            map.put("submitter", user.getRealName());
+        }
+        return new ModelAndView("general/detailedItemSubmit", map);
+    }
+
+    @PostMapping("/general/assignments/{prjId}/{itemId}/actions/submit")
+    public ModelAndView generalItemSubmit(HttpServletRequest request, @PathVariable("itemId") Integer itemId, @PathVariable("prjId") Integer prjId, MultipartFile invoice, MultipartFile receipt, MultipartFile transaction, MultipartFile attachment) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        ReceiptForm receiptForm = new ReceiptForm();
+        if (receipt != null) {
+            String receiptUrl = FileUtil.imageUpload(receipt);
+            receiptForm.setReceipt(receiptUrl);
+        }
+        if (invoice != null) {
+            String invoiceUrl = FileUtil.imageUpload(invoice);
+            receiptForm.setInvoice(invoiceUrl);
+        }
+        if (transaction != null) {
+            String transactionUrl = FileUtil.imageUpload(transaction);
+            receiptForm.setTransaction(transactionUrl);
+        }
+        if (attachment != null) {
+            // TODO
+        }
+        assignmentService.assignmentSubmit(receiptForm, itemId, userId);
+        return new ModelAndView("redirect:/general/assignments/" + prjId + "/" + itemId + "/pages/submit");
     }
 }

@@ -6,6 +6,9 @@ import java.io.File;
 
 @Data
 public class ReceiptForm {
-    private File receipt;
 
+    private String invoice;
+    private String receipt;
+    private String transaction;
+    private String attachment;
 }

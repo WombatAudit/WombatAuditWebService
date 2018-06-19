@@ -113,16 +113,6 @@ public interface ProjectMapper {
     })
     Item findItem(Integer itemId);
 
-    @Select("select * from receipt where rcpt_id = #{rcptId}")
-    @Results({
-            @Result(property = "rcptId", column = "rcpt_id", javaType = Integer.class),
-            @Result(property = "receipt", column = "receipt", javaType = String.class),
-            @Result(property = "invoice", column = "invoice", javaType = String.class),
-            @Result(property = "transaction", column = "transaction", javaType = String.class),
-            @Result(property = "attachment", column = "attachment", javaType = String.class)
-    })
-    Receipt findReceipt(Integer rcptId);
-
     @Update("update project set status = #{status} where prj_id = #{prjId}")
     void updateStatus(@Param("prjId") Integer prjId, @Param("status") Integer status);
 
@@ -134,12 +124,13 @@ public interface ProjectMapper {
     })
     Version findVersion(Integer versionId);
 
-    @Insert("insert into versionId(versionId, tag) values (#{versionId}, #{tag})")
-    void createVersion(Version version);
-
     @Update("update project set versionId = #{versionId} where prj_id = #{prjId}")
     void updateProjectVersion(@Param("prjId") Integer prjId, @Param("versionId") Integer versionId);
 
     @Insert("insert into project_version(version_id, prj_id) values (#{versionId}, #{prjId})")
     void addProjectVersion(@Param("versionId") Integer versionId, @Param("prjId") Integer prjId);
+
+    @Insert("insert into version(tag) values (#{tag})")
+    @Options(useGeneratedKeys = true, keyColumn = "version_id",keyProperty = "versionId")
+    void createVersion(Version version);
 }

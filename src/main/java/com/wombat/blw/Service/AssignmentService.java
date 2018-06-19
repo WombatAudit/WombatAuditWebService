@@ -1,6 +1,5 @@
 package com.wombat.blw.Service;
 
-import com.wombat.blw.DTO.DetailedAssignmentDTO;
 import com.wombat.blw.DTO.MemberDTO;
 import com.wombat.blw.DTO.SimpleAssignmentDTO;
 import com.wombat.blw.Form.ReceiptForm;
@@ -9,17 +8,17 @@ import java.util.List;
 
 public interface AssignmentService {
 
-    List<SimpleAssignmentDTO> getListByPrjId(Integer prjId);
+    void create(Integer itemId, Integer assigneeId, Integer assignerId);
 
-    List<SimpleAssignmentDTO> getListByUserId(Integer userId);
-
-    DetailedAssignmentDTO getDetail(Integer itemId);
-
-    void updateReceipt(Integer itemId, ReceiptForm receiptForm);
-
-    void assign(Integer itemId, Integer userId);
-
-    List<MemberDTO> findAssignmentReceiver(Integer itemId);
+    List<MemberDTO> findAssigneeList(Integer itemId);
 
     List<MemberDTO> findMembersNotAssign(Integer orgId, Integer itemId);
+
+    List<SimpleAssignmentDTO> findSimpleAssigned(Integer assignerId);
+
+    List<SimpleAssignmentDTO> findSimpleAssignedInStatus(Integer assignerId, Integer status);
+
+    List<SimpleAssignmentDTO> findSimpleReceivedInStatus(Integer assignerId, Integer status);
+
+    void assignmentSubmit(ReceiptForm receiptForm, Integer itemId, Integer userId);
 }

@@ -8,10 +8,7 @@ import com.wombat.blw.DTO.SimpleUserDTO;
 import com.wombat.blw.Enum.OrgRoleEnum;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
-import com.wombat.blw.Mapper.CompanyMapper;
-import com.wombat.blw.Mapper.ParticipateMapper;
-import com.wombat.blw.Mapper.ProjectMapper;
-import com.wombat.blw.Mapper.UserMapper;
+import com.wombat.blw.Mapper.*;
 import com.wombat.blw.Service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +21,7 @@ public class UserServiceImpl implements UserService {
 //    private WebSocket webSocket;
 //
 //    @Override
-//    public void create(User user) {
+//    public void createReceipt(User user) {
 //        userMapper.insert(user);
 //
 //        //send WebSocket message
@@ -52,6 +49,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ProjectMapper projectMapper;
+
+    @Autowired
+    private ReceiptMapper receiptMapper;
 
     @Override
     public User getOne(UserSignInForm userSignInForm) {
@@ -97,5 +97,11 @@ public class UserServiceImpl implements UserService {
     public Boolean ifManagesPrj(Integer userId, Integer prjId) {
         Project project = projectMapper.findById(prjId);
         return ifManagesOrg(userId, project.getOrgId());
+    }
+
+    @Override
+    public User findReceiptSubmitter(Integer rcptId) {
+        Integer userId = receiptMapper.findUserIdByRcptId(rcptId);
+        return userMapper.findUserByUserId(userId);
     }
 }
