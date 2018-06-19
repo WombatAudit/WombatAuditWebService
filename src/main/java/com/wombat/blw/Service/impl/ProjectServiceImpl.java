@@ -41,7 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
         Version version = new Version();
         version.setTag("Initial");
         projectMapper.createVersion(version);
-        projectMapper.addProjectVersion(project.getPrjId(), version.getVersionId());
+        projectMapper.addProjectVersion(version.getVersionId(), project.getPrjId());
         projectMapper.updateProjectVersion(project.getPrjId(), 1);
         Project newProject = projectMapper.findById(project.getPrjId());
         SimpleProjectDTO simpleProjectDTO = new SimpleProjectDTO();

@@ -36,7 +36,7 @@ public interface ItemMapper {
     @Delete("delete from detail where version_id = #{versionId} and item_id = #{itemId}")
     void deleteDetail(Detail detail);
 
-    @Select("select prj_id from assignment natural join detail natural join project_version where item_id = #{itemId}")
+    @Select("select distinct prj_id from assignment natural join detail natural join project_version where item_id = #{itemId}")
     @ResultType(Integer.class)
     Integer findItemPrjId(Integer itemId);
 
