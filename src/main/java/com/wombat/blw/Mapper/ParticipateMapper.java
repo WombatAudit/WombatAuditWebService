@@ -25,7 +25,7 @@ public interface ParticipateMapper {
     })
     List<Participate> getSome(Integer organizationId);
 
-    @Insert("INSERT INTO participate(org_id, user_id, role) VALUES (#{organizationId}, #{userId}, #{role})")
+    @Insert("INSERT INTO participate(org_id, user_id, role) VALUES (#{orgId}, #{userId}, #{role})")
     void insert(Participate participate);
 
 
