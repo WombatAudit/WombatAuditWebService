@@ -67,7 +67,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Description</th>
+                        <th style="width: 40%;">Description</th>
                         <th>Budget</th>
                         <th>Create Time</th>
                         <th></th>

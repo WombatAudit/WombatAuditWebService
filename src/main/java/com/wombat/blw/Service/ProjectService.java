@@ -29,7 +29,11 @@ public interface ProjectService {
 
     GeneralDetailedProjectDTO findGeneralDetailedProject(Integer prjId);
 
-    GeneralDetailedProjectDTO findDetailedProjectByVersionId(Integer prjId,Integer versionId);
+    GeneralDetailedProjectDTO findDetailedProjectByVersionId(Integer prjId, Integer versionId);
 
-    int addVersionByProject(int prjId,String tag);
+    int addVersionByProject(int prjId, String tag);
+
+    List<VersionDTO> findVersionList(Integer prjId);
+
+    void updateVersion(Integer prjId, Integer versionId);
 }

@@ -45,9 +45,9 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="/wombataudit/general/projects/pages/create"><i class="icon fa fa-circle-o"></i> Create a project</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/notStarted"><i class="icon fa fa-circle-o"></i> Not started</a></li>
-                <li><a class="treeview-item" href="/wombataudit/general/projects/toCreate"><i class="icon fa fa-circle-o"></i> Request to create</a></li>
-                <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/toCreate"><i class="icon fa fa-circle-o"></i> Request creation</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/inProgress"><i class="icon fa fa-circle-o"></i> In progress</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/deferred"><i class="icon fa fa-circle-o"></i> Deferred</a></li>
             </ul>
         </li>
@@ -86,10 +86,11 @@
             <div class="tile">
                 <div class="tile-title-w-btn">
                     <h2 class="title">${prj.name}</h2>
-                    <#if prj.status==0>
-                        <#if manage??>
-                        <div class="btn-group"><a class="btn btn-primary" href="#"><i class="fa fa-lg fa-plus"></i></a><a class="btn btn-primary" href="/wombataudit/general/projects/${prj.prjId?c}/pages/update"><i class="fa fa-lg fa-edit"></i></a></div>
-                        </#if>
+                    <#if manage?? && prj.status==0>
+                        <div class="btn-group"><a class="btn btn-success" href="/wombataudit/general/projects/${prj.prjId?c}/actions/request"><i class="fa fa-lg fa-check-square-o"></i></a><a class="btn btn-primary" href="/wombataudit/general/projects/${prj.prjId?c}/pages/update"><i class="fa fa-lg fa-edit"></i></a></div>
+                    </#if>
+                    <#if manage?? && prj.status==2>
+                        <div class="btn-group"><a class="btn btn-success" href="/wombataudit/general/projects/${prj.prjId?c}/actions/request"><i class="fa fa-lg fa-check-square-o"></i></a></div>
                     </#if>
                 </div>
                 <div class="tile-body">
@@ -99,14 +100,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div id="version-info" class="col-md-4">
             <div class="tile">
                 <div class="tile-title-w-btn">
                     <h4 class="title">Version</h4>
-                    <#if prj.status==0>
-                        <#if manage??>
-                            <div class="btn-group"><a class="btn btn-primary" href="#"><i class="fa fa-lg fa-plus"></i></a><a class="btn btn-primary" href="#"><i class="fa fa-lg fa-edit"></i></a></div>
-                        </#if>
+                    <#if manage?? && prj.status==0>
+                        <div class="btn-group"><button id="bt-add-version" class="btn btn-primary" href="#"><i class="fa fa-lg fa-plus"></i></button><button id="bt-version-switch" class="btn btn-primary" href="#"><i class="fa fa-lg fa-edit"></i></button></div>
                     </#if>
                 </div>
                 <div class="tile-body">
@@ -122,6 +121,31 @@
                 </div>
             </div>
         </div>
+        <#if manage?? && prj.status==0>
+            <div id="version-switch" class="col-md-4">
+                <div class="tile">
+                    <div class="tile-title-w-btn">
+                        <h4 class="title">Switch Version</h4>
+                    </div>
+                    <div class="tile-body">
+                        <form method="get" id="switch">
+                            <select class="form-control" id="versionSelect">
+                                <optgroup label="Select Version">
+                                <#list vcsList as vcs>
+                                    <option value="${vcs.versionId}">${vcs.tag}</option>
+                                </#list>
+                                </optgroup>
+                            </select>
+                            <div class="tile-footer">
+                                <button id="do-switch" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-code-fork"></i>Switch</button>&nbsp;&nbsp;&nbsp;
+                                <button id="bt-version-confirm" class="btn btn-success" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Confirm</button>&nbsp;&nbsp;&nbsp;
+                                <button id="bt-cancel-version-switch" class="btn btn-secondary" type="button"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </#if>
     </div>
     <#if manage??>
         <div id="add-item" class="row">
@@ -291,27 +315,47 @@
 <!-- The javascript plugin to display page loading on top-->
 <script src="/wombataudit/js/plugins/pace.min.js"></script>
 <!-- Page specific javascripts-->
+<script type="text/javascript" src="/wombataudit/js/plugins/select2.min.js"></script>
 <script>
     $('.bs-component [data-toggle="popover"]').popover();
     $('.bs-component [data-toggle="tooltip"]').tooltip();
+    $('#versionSelect').select2();
 </script>
 <#if manage??>
     <script>
         $(document).ready(function () {
             $("#add-item").hide();
             $("#add-version").hide();
+            <#if prj.status==0>
+                $('#version-switch').hide();
+                $('#bt-version-switch').click(function () {
+                    $('#version-info').hide();
+                    $('#version-switch').show();
+                });
+                $('#bt-cancel-version-switch').click(function () {
+                    $('#version-switch').hide();
+                    $('#version-info').show();
+                });
+                $('#do-switch').click(function () {
+                    $('#switch').attr('action', "/wombataudit/general/projects/${prj.prjId?c}/" + $('#versionSelect').val());
+                    $('#switch').submit();
+                });
+                $('#bt-version-confirm').click(function () {
+                    location.href = "/wombataudit/general/projects/${prj.prjId?c}/" + $('#versionSelect').val() + "/actions/confirm";
+                });
+            </#if>
             $("#bt-add-item").click(function () {
                 $("#add-item").show();
             });
             $("#bt-cancel-add-item").click(function () {
                 $("#add-item").hide();
-            })
+            });
             $("#bt-add-version").click(function () {
                 $("#add-version").show();
             });
             $("#bt-cancel-add-version").click(function () {
                 $("#add-version").hide();
-            })
+            });
         })
     </script>
 </#if>

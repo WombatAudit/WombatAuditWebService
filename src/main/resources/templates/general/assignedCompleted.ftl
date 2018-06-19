@@ -60,10 +60,10 @@
                         class="icon fa fa-circle-o"></i> Not started</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/toCreate"><i
                         class="icon fa fa-circle-o"></i> Request to create</a></li>
-                <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i
-                        class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/inProgress"><i
                         class="icon fa fa-circle-o"></i> In progress</a></li>
+                <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i
+                        class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/deferred"><i
                         class="icon fa fa-circle-o"></i> Deferred</a></li>
             </ul>

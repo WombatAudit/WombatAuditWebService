@@ -13,15 +13,7 @@ public class ProjectDTO {
     private Date createTime;
     private Date endTime;
     private String description;
-
-    public ProjectDTO(Integer prjId, String name, Integer status, Date createTime, Date endTime, String description) {
-        this.prjId = prjId;
-        this.name = name;
-        this.status = status;
-        this.createTime = createTime;
-        this.endTime = endTime;
-        this.description = description;
-    }
+    private Integer versionId;
 
     public ProjectDTO() {
     }

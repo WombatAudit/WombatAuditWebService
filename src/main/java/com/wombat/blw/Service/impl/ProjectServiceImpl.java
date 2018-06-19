@@ -171,4 +171,15 @@ public class ProjectServiceImpl implements ProjectService {
         generalDetailedProjectDTO.setItemDTOList(itemDTOList);
         return generalDetailedProjectDTO;
     }
+
+    @Override
+    public List<VersionDTO> findVersionList(Integer prjId) {
+        List<Version> versionList = projectMapper.findVersionByPrjId(prjId);
+        return versionList.stream().map(e -> new VersionDTO(e.getVersionId(), e.getTag(), e.getCreateTime())).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateVersion(Integer prjId, Integer versionId) {
+        projectMapper.updateProjectVersion(prjId, versionId);
+    }
 }

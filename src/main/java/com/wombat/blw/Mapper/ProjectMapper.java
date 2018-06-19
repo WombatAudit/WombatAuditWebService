@@ -2,7 +2,6 @@ package com.wombat.blw.Mapper;
 
 import com.wombat.blw.DO.Item;
 import com.wombat.blw.DO.Project;
-import com.wombat.blw.DO.Receipt;
 import com.wombat.blw.DO.Version;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
@@ -124,7 +123,7 @@ public interface ProjectMapper {
     })
     Version findVersion(Integer versionId);
 
-    @Update("update project set versionId = #{versionId} where prj_id = #{prjId}")
+    @Update("update project set version_id = #{versionId} where prj_id = #{prjId}")
     void updateProjectVersion(@Param("prjId") Integer prjId, @Param("versionId") Integer versionId);
 
     @Insert("insert into project_version(version_id, prj_id) values (#{versionId}, #{prjId})")
@@ -133,4 +132,12 @@ public interface ProjectMapper {
     @Insert("insert into version(tag) values (#{tag})")
     @Options(useGeneratedKeys = true, keyColumn = "version_id",keyProperty = "versionId")
     void createVersion(Version version);
+
+    @Select("select * from version natural join project_version where prj_id = #{prjId}")
+    @Results({
+            @Result(property = "versionId", column = "version_id", javaType = Integer.class),
+            @Result(property = "createTime", column = "create_time", javaType = Date.class),
+            @Result(property = "tag", column = "tag", javaType = String.class)
+    })
+    List<Version> findVersionByPrjId(Integer prjId);
 }

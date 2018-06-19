@@ -5,6 +5,7 @@ import com.wombat.blw.DTO.*;
 import com.wombat.blw.Enum.AssignmentStatusEnum;
 import com.wombat.blw.Enum.ProjectStatusEnum;
 import com.wombat.blw.Exception.InvalidParameterException;
+import com.wombat.blw.Exception.ProjectStatusException;
 import com.wombat.blw.Form.ItemForm;
 import com.wombat.blw.Form.OrganizationForm;
 import com.wombat.blw.Form.ProjectForm;
@@ -142,16 +143,45 @@ public class GeneralUserPageController {
     }
 
     @GetMapping("/general/projects/{id}")
-    public ModelAndView generalDetailedProject(Map<String, Object> map, HttpServletRequest request, @PathVariable("id") Integer prjId) {
+    public ModelAndView generalDetailedProject(@PathVariable("id") Integer prjId) {
+        ProjectDTO projectDTO = projectService.findOne(prjId);
+        return new ModelAndView("redirect:/general/projects/" + prjId + "/" + projectDTO.getVersionId());
+    }
+
+    @GetMapping("/general/projects/{prjId}/{versionId}")
+    public ModelAndView generalDetailedProjectVersion(Map<String, Object> map, HttpServletRequest request, @PathVariable("prjId") Integer prjId, @PathVariable("versionId") Integer versionId) {
         Integer userId = UserUtil.getUserId(request, redisTemplate);
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
-        GeneralDetailedProjectDTO generalDetailedProjectDTO = projectService.findGeneralDetailedProject(prjId);
+        GeneralDetailedProjectDTO generalDetailedProjectDTO = projectService.findDetailedProjectByVersionId(prjId, versionId);
         map.put("prj", generalDetailedProjectDTO);
+        List<VersionDTO> versionDTOList = projectService.findVersionList(prjId);
+        map.put("vcsList", versionDTOList);
         if (userService.ifManagesPrj(userId, generalDetailedProjectDTO.getPrjId())) {
             map.put("manage", "Yes");
         }
         return new ModelAndView("general/detailedProject", map);
+    }
+
+    @GetMapping("/general/projects/{prjId}/{versionId}/actions/confirm")
+    public ModelAndView generalDetailedProjectVersion(@PathVariable("prjId") Integer prjId, @PathVariable("versionId") Integer versionId) {
+        projectService.updateVersion(prjId, versionId);
+        return new ModelAndView("redirect:/general/projects/" + prjId + "/" + versionId);
+    }
+
+    @GetMapping("/general/projects/{prjId}/actions/request")
+    public ModelAndView generalDetailedProjectVersion(@PathVariable("prjId") Integer prjId) {
+        ProjectDTO projectDTO = projectService.findOne(prjId);
+        if (projectDTO.getStatus().equals(ProjectStatusEnum.NOT_STARTED.getCode())) {
+            projectService.updateStatus(prjId, ProjectStatusEnum.REQUEST_CREATION.getCode());
+            //TODO notify
+        } else if (projectDTO.getStatus().equals(ProjectStatusEnum.IN_PROGRESS.getCode())) {
+            projectService.updateStatus(prjId, ProjectStatusEnum.REQUEST_REIMBURSEMENT.getCode());
+            //TODO notify
+        } else {
+            throw new ProjectStatusException();
+        }
+        return new ModelAndView("redirect:/general/projects/" + prjId);
     }
 
     @GetMapping("/general/projects/toCreate")
@@ -228,19 +258,6 @@ public class GeneralUserPageController {
         }
         itemService.createItem(versionId, itemForm);
         return new ModelAndView("redirect:/general/projects/" + prjId);
-    }
-
-    @GetMapping("/general/projects/{id}/{versionId}")
-    public ModelAndView generalDetailedProjectVersion(Map<String, Object> map, HttpServletRequest request, @PathVariable("id") Integer prjId, @PathVariable("versionId") Integer versionId) {
-        Integer userId = UserUtil.getUserId(request, redisTemplate);
-        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
-        map.put("user", simpleUserDTO);
-        GeneralDetailedProjectDTO generalDetailedProjectDTO = projectService.findDetailedProjectByVersionId(prjId,versionId);
-        map.put("prj", generalDetailedProjectDTO);
-        if (userService.ifManagesPrj(userId, generalDetailedProjectDTO.getPrjId())) {
-            map.put("manage", "Yes");
-        }
-        return new ModelAndView("general/detailedProject", map);
     }
 
     @PostMapping("/general/projects/{id}/versions")
