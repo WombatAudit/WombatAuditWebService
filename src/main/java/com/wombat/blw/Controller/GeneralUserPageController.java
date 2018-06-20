@@ -359,7 +359,7 @@ public class GeneralUserPageController {
         map.put("user", simpleUserDTO);
         List<SimpleAssignmentDTO> simpleAssignmentDTOList = assignmentService.findSimpleAssignedInStatus(userId, AssignmentStatusEnum.COMPLETED.getCode());
         map.put("assignmentList", simpleAssignmentDTOList);
-        return new ModelAndView("general/assignedCompleted", map);
+        return new ModelAndView("general/assignedSubmitted", map);
     }
 
     @GetMapping("/general/assignments/pages/received/inProgress")
@@ -377,9 +377,9 @@ public class GeneralUserPageController {
         Integer userId = UserUtil.getUserId(request, redisTemplate);
         SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
         map.put("user", simpleUserDTO);
-        List<SimpleAssignmentDTO> simpleAssignmentDTOList = assignmentService.findSimpleReceivedInStatus(userId, AssignmentStatusEnum.COMPLETED.getCode());
+        List<SimpleAssignmentDTO> simpleAssignmentDTOList = assignmentService.findSimpleReceivedInStatus(userId, AssignmentStatusEnum.SUBMITTED.getCode());
         map.put("assignmentList", simpleAssignmentDTOList);
-        return new ModelAndView("general/receivedCompleted", map);
+        return new ModelAndView("general/receivedSubmitted", map);
     }
 
     @GetMapping("/general/assignments/{prjId}/{itemId}/pages/submit")
@@ -421,5 +421,25 @@ public class GeneralUserPageController {
         }
         assignmentService.assignmentSubmit(receiptForm, itemId, userId);
         return new ModelAndView("redirect:/general/assignments/" + prjId + "/" + itemId + "/pages/submit");
+    }
+
+    @GetMapping("/general/pages/notifications")
+    public ModelAndView generalPageNotification(Map<String, Object> map, HttpServletRequest request) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
+        map.put("user", simpleUserDTO);
+        List<NotificationDTO> notificationDTOList = messageService.findNotRead(userId);
+        map.put("notifyList", notificationDTOList);
+        return new ModelAndView("general/notifications", map);
+    }
+
+    @PostMapping("/general/notifications/actions/read")
+    public ModelAndView generalNotificationRead(HttpServletRequest request, String listId) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        ReceiverForm receiverForm = new ReceiverForm();
+        receiverForm.setUserId(userId);
+        receiverForm.setListId(listId);
+        messageService.setRead(receiverForm);
+        return new ModelAndView("redirect:/general/pages/notifications");
     }
 }

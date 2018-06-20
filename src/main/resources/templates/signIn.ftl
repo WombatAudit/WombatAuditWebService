@@ -7,7 +7,8 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="/wombataudit/css/main.css">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Sign In - Wombat Audit</title>
 </head>
 <body>
@@ -19,7 +20,8 @@
         <h1>Wombat Audit</h1>
     </div>
     <div class="login-box" style="min-height: 470px">
-        <form class="login-form" action="/wombataudit/users/actions/signIn" method="post" enctype="application/x-www-form-urlencoded">
+        <form class="login-form" action="/wombataudit/users/actions/signIn" method="post"
+              enctype="application/x-www-form-urlencoded">
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Sign In</h3>
             <div class="form-group">
                 <label class="control-label">Username</label>
@@ -39,9 +41,12 @@
                 </div>
             </div>
             <div class="form-group btn-container">
-                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</button>
-                <a class="btn btn-primary btn-block" href="/wombataudit/pages/signUp" style="background-color: #f4c20d; border-color: #f4c20d;">Go to Sign Up</a>
-                <a class="btn btn-primary btn-block" href="/wombataudit/pages/companyRegister" style="background-color: #db3236; border-color: #db3236;">Go to Register company</a>
+                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In
+                </button>
+                <a class="btn btn-primary btn-block" href="/wombataudit/pages/signUp"
+                   style="background-color: #f4c20d; border-color: #f4c20d;">Go to Sign Up</a>
+                <a class="btn btn-primary btn-block" href="/wombataudit/pages/companyRegister"
+                   style="background-color: #db3236; border-color: #db3236;">Go to Register company</a>
             </div>
         </form>
     </div>

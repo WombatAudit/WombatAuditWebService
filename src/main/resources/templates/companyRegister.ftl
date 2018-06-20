@@ -7,7 +7,8 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="/wombataudit/css/main.css">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Company Register - WombatAudit</title>
 </head>
 <body>
@@ -22,7 +23,8 @@
         <div class="tile">
             <h3 class="tile-title">Company Register</h3>
             <div class="tile-body">
-                <form class="form-horizontal" action="/wombataudit/companies" method="post" enctype="application/x-www-form-urlencoded">
+                <form class="form-horizontal" action="/wombataudit/companies" method="post"
+                      enctype="application/x-www-form-urlencoded">
                     <div class="form-group row">
                         <label class="control-label col-md-3">Name</label>
                         <div class="col-md-8">
@@ -32,25 +34,29 @@
                     <div class="form-group row">
                         <label class="control-label col-md-3">Description</label>
                         <div class="col-md-8">
-                            <textarea class="form-control" rows="4" placeholder="Enter company description" name="description"></textarea>
+                            <textarea class="form-control" rows="4" placeholder="Enter company description"
+                                      name="description"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="control-label col-md-3">Tax ID</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-8" type="text" placeholder="Enter company tax ID" name="taxId">
+                            <input class="form-control col-md-8" type="text" placeholder="Enter company tax ID"
+                                   name="taxId">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="control-label col-md-3">Account Bank</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="text" placeholder="Enter company account bank" name="accountBank">
+                            <input class="form-control" type="text" placeholder="Enter company account bank"
+                                   name="accountBank">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="control-label col-md-3">Account</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="number" placeholder="Enter company account" name="account">
+                            <input class="form-control" type="number" placeholder="Enter company account"
+                                   name="account">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -65,7 +71,12 @@
                     <div class="tile-footer">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-3">
-                                <button class="btn btn-primary" type="submit" style="background-color: #db3236; border-color: #db3236"><i class="fa fa-fw fa-lg fa-check-circle"></i>Register</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="/wombataudit/pages/signIn"><i class="fa fa-fw fa-lg fa-times-circle"></i>Go back to Sign In</a>
+                                <button class="btn btn-primary" type="submit"
+                                        style="background-color: #db3236; border-color: #db3236"><i
+                                        class="fa fa-fw fa-lg fa-check-circle"></i>Register
+                                </button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary"
+                                                              href="/wombataudit/pages/signIn"><i
+                                    class="fa fa-fw fa-lg fa-times-circle"></i>Go back to Sign In</a>
                             </div>
                         </div>
                     </div>

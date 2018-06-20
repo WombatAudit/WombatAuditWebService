@@ -15,7 +15,7 @@
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description"
           content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Organizations - WombatAudit Admin</title>
+    <title>Organizations - WombatAudit General</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
 </head>
 <body class="app sidebar-mini rtl">
 <!-- Navbar-->
-<#include "/admin/common/navbar.ftl">
+<#include "/general/common/navbar.ftl">
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
@@ -42,7 +42,7 @@
     <ul class="app-menu">
         <li><a class="app-menu__item" href="/wombataudit/admin/organizations"><i
                 class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Organizations</span></a></li>
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                 class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Projects</span><i
                 class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
@@ -52,8 +52,7 @@
                         class="icon fa fa-circle-o"></i> Request to reimburse</a></li>
                 <li><a class="treeview-item" href="/wombataudit/admin/projects/inProgress"><i
                         class="icon fa fa-circle-o"></i> In progress</a></li>
-                <li><a class="treeview-item active" href="/wombataudit/admin/projects/deferred"><i
-                        class="icon fa fa-circle-o"></i> Deferred</a></li>
+
             </ul>
         </li>
     </ul>
@@ -62,49 +61,36 @@
 <main class="app-content">
     <div class="app-title">
         <div class="div">
-            <h1><i class="fa fa-laptop"></i> Projects</h1>
-            <p>All active projects</p>
+            <h1><i class="fa fa-laptop"></i> Notifications</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="#">Projects</a></li>
+            <li class="breadcrumb-item"><a href="#">Notifications</a></li>
         </ul>
     </div>
-    <div class="col-md-12">
-        <div class="tile">
-            <h3 class="tile-title">All deferred projects</h3>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Organization Name</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <#list projectList as prj>
-                    <tr>
-                        <td>${prj?counter}</td>
-                        <td>${prj.name}</td>
-                        <td>${prj.orgName}</td>
-                        <td>${prj.startTime?datetime}</td>
-                        <td>${prj.endTime?datetime}</td>
-                        <td>
-                            <button onclick="window.location.href='/wombataudit/admin/projects/${prj.prjId?c}'"
-                                    class="btn btn-primary btn-sm" type="button">View
-                            </button>
-                        </td>
-                    </tr>
+    <div class="row">
+        <div class="col-12">
+            <div class="tile">
+                <table class="table table-hover">
+                    <#if notifyList?size == 0>
+                        <p>No notifications</p>
+                    </#if>
+                    <#list notifyList as notify>
+                        <tr>
+                            <td style="width: 70%">${notify.content}</td>
+                            <td>${notify.time?datetime}</td>
+                            <td>
+                                <form method="post" action="/wombataudit/admin/notifications/actions/read"
+                                      enctype="application/x-www-form-urlencoded">
+                                    <input type="hidden" value="${notify.listId}" name="listId">
+                                    <button class="btn btn-primary btn-sm" type="submit">Check</button>
+                                </form>
+                            </td>
+                        </tr>
                     </#list>
-                    </tbody>
                 </table>
             </div>
         </div>
-    </div>
     </div>
 </main>
 <!-- Essential javascripts for application to work-->

@@ -79,12 +79,16 @@ public interface UserMapper {
 
     @Select("select * from user where co_id = #{coId} and role = #{role}")
     @Results({
+            @Result(property = "userId", column = "user_id", javaType = Integer.class),
+            @Result(property = "username", column = "username", javaType = String.class),
+            @Result(property = "password", column = "password", javaType = String.class),
+            @Result(property = "realName", column = "real_name", javaType = String.class),
+            @Result(property = "role", column = "role", javaType = Integer.class),
+            @Result(property = "gender", column = "gender", javaType = Integer.class),
+            @Result(property = "tel", column = "tel", javaType = BigDecimal.class),
+            @Result(property = "email", column = "email", javaType = String.class),
             @Result(property = "companyId", column = "co_id", javaType = Integer.class),
-            @Result(property = "name", column = "name", javaType = String.class),
-            @Result(property = "description", column = "description", javaType = String.class),
-            @Result(property = "taxId", column = "tax_id", javaType = String.class),
-            @Result(property = "accountBank", column = "account_bank", javaType = String.class),
-            @Result(property = "account", column = "account", javaType = BigDecimal.class)
+            @Result(property = "createTime", column = "create_time", javaType = Date.class)
     })
     List<User> findUserListInCompanyOfRole(@Param("coId") Integer coId, @Param("role") Integer role);
 }

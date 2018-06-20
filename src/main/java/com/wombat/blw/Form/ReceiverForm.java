@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ReceiverForm {
 
-    private Integer listId;
+    private String listId;
     private Integer userId;
 }

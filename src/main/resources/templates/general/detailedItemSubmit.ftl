@@ -63,7 +63,7 @@
                 <li><a class="treeview-item" href="/wombataudit/general/projects/inProgress"><i
                         class="icon fa fa-circle-o"></i> In progress</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i
-                        class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
+                        class="icon fa fa-circle-o"></i> Request to reimburse</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/deferred"><i
                         class="icon fa fa-circle-o"></i> Deferred</a></li>
             </ul>
@@ -75,11 +75,11 @@
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/inProgress"><i
                         class="icon fa fa-circle-o"></i> Assigned in Progress</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/completed"><i
-                        class="icon fa fa-circle-o"></i> Assigned Completed</a></li>
+                        class="icon fa fa-circle-o"></i> Assigned Submitted</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/inProgress"><i
                         class="icon fa fa-circle-o"></i> Received in Progress</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/completed"><i
-                        class="icon fa fa-circle-o"></i> Received Completed</a></li>
+                        class="icon fa fa-circle-o"></i> Received Submitted</a></li>
             </ul>
         </li>
     </ul>
@@ -144,7 +144,8 @@
             <div class="tile">
                 <h3 class="tile-title"><i class="fa fa-file-text-o"></i> New Submission</h3>
                 <div class="tile-body">
-                    <form method="post" enctype="multipart/form-data" action="/wombataudit/general/assignments/${item.prjId}/${item.itemId}/actions/submit">
+                    <form method="post" enctype="multipart/form-data"
+                          action="/wombataudit/general/assignments/${item.prjId}/${item.itemId}/actions/submit">
                         <div class="form-group row">
                             <label class="control-label col-md-3">Invoice</label>
                             <div class="col-md-8">
@@ -170,8 +171,11 @@
                             </div>
                         </div>
                         <div class="tile-footer">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button>&nbsp;&nbsp;&nbsp;
-                            <button id="bt-cancel-submit" class="btn btn-secondary" type="button"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</button>
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Submit
+                            </button>&nbsp;&nbsp;&nbsp;
+                            <button id="bt-cancel-submit" class="btn btn-secondary" type="button"><i
+                                    class="fa fa-fw fa-lg fa-times-circle"></i>Cancel
+                            </button>
                         </div>
                     </form>
                 </div>

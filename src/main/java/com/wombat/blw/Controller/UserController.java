@@ -7,6 +7,7 @@ import com.wombat.blw.Enum.CompanyRoleEnum;
 import com.wombat.blw.Enum.ErrorCode;
 import com.wombat.blw.Form.UserSignInForm;
 import com.wombat.blw.Form.UserSignUpForm;
+import com.wombat.blw.Service.MessageService;
 import com.wombat.blw.Service.UserService;
 import com.wombat.blw.Util.CookieUtil;
 import com.wombat.blw.Util.EnumUtil;
@@ -37,6 +38,9 @@ public class UserController {
 
     @Autowired
     private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private MessageService messageService;
 
     @PostMapping("/actions/signUp")
     public ModelAndView signUp(Map<String, Object> map, HttpServletResponse response,
@@ -92,5 +96,4 @@ public class UserController {
         map.put("url", "/wombataudit");
         return new ModelAndView("common/success", map);
     }
-    
 }

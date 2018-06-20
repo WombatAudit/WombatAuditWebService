@@ -59,11 +59,11 @@
                 <li><a class="treeview-item" href="/wombataudit/general/projects/notStarted"><i
                         class="icon fa fa-circle-o"></i> Not started</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/toCreate"><i
-                        class="icon fa fa-circle-o"></i> Request creation</a></li>
+                        class="icon fa fa-circle-o"></i> Request to create</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/inProgress"><i
                         class="icon fa fa-circle-o"></i> In progress</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/toReimburse" rel="noopener"><i
-                        class="icon fa fa-circle-o"></i> Request reimbursement</a></li>
+                        class="icon fa fa-circle-o"></i> Request to reimburse</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/projects/deferred"><i
                         class="icon fa fa-circle-o"></i> Deferred</a></li>
             </ul>
@@ -75,11 +75,11 @@
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/inProgress"><i
                         class="icon fa fa-circle-o"></i> Assigned in Progress</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/assigned/completed"><i
-                        class="icon fa fa-circle-o"></i> Assigned Completed</a></li>
+                        class="icon fa fa-circle-o"></i> Assigned Submitted</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/inProgress"><i
                         class="icon fa fa-circle-o"></i> Received in Progress</a></li>
                 <li><a class="treeview-item" href="/wombataudit/general/assignments/pages/received/completed"><i
-                        class="icon fa fa-circle-o"></i> Received Completed</a></li>
+                        class="icon fa fa-circle-o"></i> Received Submitted</a></li>
             </ul>
         </li>
     </ul>
@@ -95,7 +95,30 @@
             <li class="breadcrumb-item"><a href="#">Notifications</a></li>
         </ul>
     </div>
-
+    <div class="row">
+        <div class="col-12">
+            <div class="tile">
+                <table class="table table-hover">
+                    <#if notifyList?size == 0>
+                        <p>No notifications</p>
+                    </#if>
+                    <#list notifyList as notify>
+                        <tr>
+                            <td style="width: 70%">${notify.content}</td>
+                            <td>${notify.time?datetime}</td>
+                            <td>
+                                <form method="post" action="/wombataudit/general/notifications/actions/read"
+                                      enctype="application/x-www-form-urlencoded">
+                                    <input type="hidden" value="${notify.listId}" name="listId">
+                                    <button class="btn btn-primary btn-sm" type="submit">Check</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </#list>
+                </table>
+            </div>
+        </div>
+    </div>
 </main>
 <!-- Essential javascripts for application to work-->
 <script src="/wombataudit/js/jquery-3.2.1.min.js"></script>

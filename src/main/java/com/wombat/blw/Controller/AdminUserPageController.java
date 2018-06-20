@@ -6,6 +6,7 @@ import com.wombat.blw.DTO.*;
 import com.wombat.blw.Enum.ProjectStatusEnum;
 import com.wombat.blw.Exception.ProjectStatusException;
 import com.wombat.blw.Form.NotificationForm;
+import com.wombat.blw.Form.ReceiverForm;
 import com.wombat.blw.Service.*;
 import com.wombat.blw.Util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -193,5 +195,25 @@ public class AdminUserPageController {
         map.put("user", simpleUserDTO);
         map.put("message", "Successfully review");
         return new ModelAndView("admin/success", map);
+    }
+
+    @GetMapping("/admin/pages/notifications")
+    public ModelAndView adminPageNotification(Map<String, Object> map, HttpServletRequest request) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        SimpleUserDTO simpleUserDTO = userService.findSimpleOne(userId);
+        map.put("user", simpleUserDTO);
+        List<NotificationDTO> notificationDTOList = messageService.findNotRead(userId);
+        map.put("notifyList", notificationDTOList);
+        return new ModelAndView("admin/notifications", map);
+    }
+
+    @PostMapping("/admin/notifications/actions/read")
+    public ModelAndView adminNotificationRead(HttpServletRequest request, String listId) {
+        Integer userId = UserUtil.getUserId(request, redisTemplate);
+        ReceiverForm receiverForm = new ReceiverForm();
+        receiverForm.setUserId(userId);
+        receiverForm.setListId(listId);
+        messageService.setRead(receiverForm);
+        return new ModelAndView("redirect:/admin/pages/notifications");
     }
 }

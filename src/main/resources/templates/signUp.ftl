@@ -7,7 +7,8 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="/wombataudit/css/main.css">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Sign Up - Wombat Audit</title>
 </head>
 <body>
@@ -22,7 +23,8 @@
         <div class="tile">
             <h3 class="tile-title">Sign Up</h3>
             <div class="tile-body">
-                <form action="/wombataudit/users/actions/signUp" method="post" enctype="application/x-www-form-urlencoded">
+                <form action="/wombataudit/users/actions/signUp" method="post"
+                      enctype="application/x-www-form-urlencoded">
                     <div class="form-group">
                         <label class="control-label">Username</label>
                         <input class="form-control" type="text" placeholder="Username" name="username">
@@ -93,8 +95,12 @@
                         </div>
                     </div>
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit" style="background-color: #f4c20d; border-color: #f4c20d"><i class="fa fa-fw fa-lg fa-check-circle"></i>Sign Up</button>&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-secondary" href="/wombataudit/pages/signIn"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back to Sign In</a>
+                        <button class="btn btn-primary" type="submit"
+                                style="background-color: #f4c20d; border-color: #f4c20d"><i
+                                class="fa fa-fw fa-lg fa-check-circle"></i>Sign Up
+                        </button>&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-secondary" href="/wombataudit/pages/signIn"><i
+                                class="fa fa-fw fa-lg fa-times-circle"></i>Back to Sign In</a>
                     </div>
                 </form>
             </div>

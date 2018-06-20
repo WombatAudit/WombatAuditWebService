@@ -70,7 +70,6 @@
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-websocket:2.0.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-messaging:5.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-websocket:5.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: com.itextpdf:itextpdf:5.5.11" />
         </element>
       </element>
       <element id="directory" name="META-INF">

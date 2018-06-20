@@ -5,6 +5,7 @@ import com.wombat.blw.DO.Receiver;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -44,6 +45,16 @@ public interface MessageMapper {
             "<foreach item='receiver' collection='receiverList' open='' separator=',' close=''> " +
             "(#{receiver.listId}, #{receiver.userId}, #{receiver.isRead}) " +
             "</foreach> </script>")
-    void createReceiver(List<Receiver> receiverList);
+    void createReceiver(@Param("receiverList") List<Receiver> receiverList);
 
+    @Select("select * from receiver join notification on receiver.list_id = notification.receivelist_id where receiver.user_id = #{userId} " +
+            "and isread = #{status}")
+    @Results({
+            @Result(property = "id", column = "id", javaType = Integer.class),
+            @Result(property = "senderId", column = "sender_id", javaType = Integer.class),
+            @Result(property = "receiveListId", column = "receivelist_id", javaType = String.class),
+            @Result(property = "content", column = "content", javaType = String.class),
+            @Result(property = "createdAt", column = "createdat", javaType = Date.class)
+    })
+    List<Notification> findNotificationListByUserIdInStatus(@Param("userId") Integer userId, @Param("status") Integer status);
 }

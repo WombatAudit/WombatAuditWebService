@@ -32,7 +32,7 @@ public class FileUtil {
                     if (str.toUpperCase().equals(fileType.toUpperCase())) {
                         fileName = "wa_" + String.valueOf(System.currentTimeMillis()) + "." + fileType;
                         file.transferTo(new File(uploadDir + fileName));
-                        //Runtime.getRuntime().exec("chmod 644 " + uploadDir + fileName);
+                        Runtime.getRuntime().exec("chmod 644 " + uploadDir + fileName);
                         return "http://47.100.253.251:8081/images/" + fileName;
                     }
                 }
