@@ -404,20 +404,15 @@ public class GeneralUserPageController {
     public ModelAndView generalItemSubmit(HttpServletRequest request, @PathVariable("itemId") Integer itemId, @PathVariable("prjId") Integer prjId, MultipartFile invoice, MultipartFile receipt, MultipartFile transaction, MultipartFile attachment) {
         Integer userId = UserUtil.getUserId(request, redisTemplate);
         ReceiptForm receiptForm = new ReceiptForm();
-        if (receipt != null) {
+        if (receipt != null && invoice != null && transaction != null) {
             String receiptUrl = FileUtil.imageUpload(receipt);
             receiptForm.setReceipt(receiptUrl);
-        }
-        if (invoice != null) {
             String invoiceUrl = FileUtil.imageUpload(invoice);
             receiptForm.setInvoice(invoiceUrl);
-        }
-        if (transaction != null) {
             String transactionUrl = FileUtil.imageUpload(transaction);
             receiptForm.setTransaction(transactionUrl);
-        }
-        if (attachment != null) {
-            // TODO
+        } else {
+            throw new InvalidParameterException();
         }
         assignmentService.assignmentSubmit(receiptForm, itemId, userId);
         return new ModelAndView("redirect:/general/assignments/" + prjId + "/" + itemId + "/pages/submit");

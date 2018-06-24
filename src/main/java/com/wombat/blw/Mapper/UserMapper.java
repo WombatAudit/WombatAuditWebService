@@ -18,10 +18,10 @@ public interface UserMapper {
     String findRealNameByUserId(int userId);
 
     @Insert("insert into user(username, password, real_name, role, gender, tel, email, co_id) " +
-            "values (#{user.username}, #{user.password}, #{user.realName}, #{user.role}, #{user.gender}, " +
-            "#{user.tel}, #{user.email}, #{user.companyId})")
-    @Options(useGeneratedKeys = true, keyColumn = "user_id")
-    void create(@Param("user") User user);
+            "values (#{username}, #{password}, #{realName}, #{role}, #{gender}, " +
+            "#{tel}, #{email}, #{companyId})")
+    @Options(useGeneratedKeys = true, keyColumn = "user_id", keyProperty = "userId")
+    void create(User user);
 
     @Select("SELECT * FROM user WHERE user_id = #{userId}")
     @Results({

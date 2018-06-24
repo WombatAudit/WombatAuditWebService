@@ -90,21 +90,21 @@
         <#if item.invoice??>
         <div class="row">
             <div class="col-12 mb-4">
-                <h4>Invoice</h4><img src="${item.invoice}">
+                <h4>Invoice</h4><img src="${item.invoice}" style="height: 50%; width: 50%;">
             </div>
         </div>
         </#if>
         <#if item.receipt??>
         <div class="row">
             <div class="col-12 mb-4">
-                <h4>Receipt</h4><img src="${item.receipt}">
+                <h4>Receipt</h4><img src="${item.receipt}" style="height: 50%; width: 50%;">
             </div>
         </div>
         </#if>
         <#if item.transaction??>
         <div class="row">
             <div class="col-12 mb-4">
-                <h4>Transaction Record</h4><img src="${item.transaction}">
+                <h4>Transaction Record</h4><img src="${item.transaction}" style="height: 50%; width: 50%;">
             </div>
         </div>
         </#if>

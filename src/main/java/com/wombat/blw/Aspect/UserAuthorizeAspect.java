@@ -28,7 +28,8 @@ public class UserAuthorizeAspect {
 
     @Pointcut("execution(public * com.wombat.blw.Controller.*.*(..))" +
             "&& !execution(public * com.wombat.blw.Controller.UserController.*(..))" +
-            "&& !execution(public * com.wombat.blw.Controller.PageController.*(..))")
+            "&& !execution(public * com.wombat.blw.Controller.PageController.*(..))" +
+            "&& !execution(public * com.wombat.blw.Controller.CompanyController.*(..))")
     public void verify() {
     }
 
@@ -46,6 +47,5 @@ public class UserAuthorizeAspect {
             log.warn("[Login verify] Cannot find token in Redis");
             throw new UserAuthorizeException();
         }
-
     }
 }

@@ -126,19 +126,22 @@
         <div class="row">
             <div class="col-12 mb-2">
                 <h4>Invoice</h4>
-                <#if item.invoice??><img src="${item.invoice}"><#else><p>NOT FOUND</p></#if>
+                <#if item.invoice??><img src="${item.invoice}" style="max-height: 60%; max-width: 100%;"><#else><p>NOT
+                    FOUND</p></#if>
             </div>
         </div>
         <div class="row">
             <div class="col-12 mb-2">
                 <h4>Receipt</h4>
-                <#if item.receipt??><img src="${item.receipt}"><#else><p>NOT FOUND</p></#if>
+                <#if item.receipt??><img src="${item.receipt}" style="max-height: 60%; max-width: 100%;"><#else><p>NOT
+                    FOUND</p></#if>
             </div>
         </div>
         <div class="row">
             <div class="col-12 mb-2">
                 <h4>Transaction Record</h4>
-                <#if item.transaction??><img src="${item.transaction}"><#else><p>NOT FOUND</p></#if>
+                <#if item.transaction??><img src="${item.transaction}" style="max-height: 60%; max-width: 100%;"><#else>
+                    <p>NOT FOUND</p></#if>
             </div>
         </div>
         <div class="row">
